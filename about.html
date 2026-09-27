@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="About Verdana Studio — Our Story, Beliefs, and Team" />
+  <title>About Us | Verdana Studio</title>
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Jost:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet" />
+  
+  <link rel="stylesheet" href="styles.css" />
+  
+  <style>
+    /* ============================================================
+       ABOUT PAGE: SPECIFIC STYLES
+       ============================================================ */
+
+    /* 1. HERO (Editorial Wide) */
+    .section-about-hero {
+      background: var(--bg-primary);
+      padding: 120px 0;
+      min-height: calc(100vh - 80px);
+      display: flex;
+      align-items: center;
+    }
+    .about-hero-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+    }
+    .about-hero-content h1 {
+      font-family: var(--font-display);
+      font-size: clamp(48px, 6vw, 80px);
+      line-height: 1.1;
+      margin-bottom: 24px;
+    }
+    .about-hero-content h1 em {
+      font-family: var(--font-serif);
+      font-style: italic;
+      color: var(--clr-deep-green);
+    }
+    [data-theme="dark"] .about-hero-content h1 em { color: var(--clr-light-sage); }
+    .about-hero-content p {
+      font-size: 18px;
+      color: var(--text-secondary);
+      max-width: 500px;
+      line-height: 1.7;
+    }
+    .about-hero-visual {
+      background: var(--bg-secondary);
+      border-radius: var(--radius-lg);
+      padding: 40px;
+      position: relative;
+    }
+    .about-hero-visual svg {
+      width: 100%;
+      height: auto;
+    }
+
+    /* 2. OUR STORY (Vertical Timeline) */
+    .section-timeline {
+      padding: var(--section-py) 0;
+      background: var(--bg-secondary);
+    }
+    .timeline-container {
+      position: relative;
+      max-width: 800px;
+      margin: 80px auto 0;
+    }
+    .timeline-container::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 50%;
+      width: 2px; height: 100%;
+      background: var(--border-color);
+      transform: translateX(-50%);
+    }
+    .timeline-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 60px;
+      position: relative;
+    }
+    .timeline-item:last-child { margin-bottom: 0; }
+    .timeline-content {
+      width: 45%;
+      padding: 30px;
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-sm);
+    }
+    .timeline-year {
+      width: 45%;
+      font-family: var(--font-display);
+      font-size: 48px;
+      color: var(--clr-deep-green);
+      text-align: right;
+    }
+    [data-theme="dark"] .timeline-year { color: var(--clr-light-sage); }
+    
+    /* Alternating logic */
+    .timeline-item:nth-child(even) { flex-direction: row-reverse; }
+    .timeline-item:nth-child(even) .timeline-year { text-align: left; }
+    
+    .timeline-dot {
+      position: absolute;
+      top: 50%; left: 50%;
+      width: 16px; height: 16px;
+      background: var(--clr-forest);
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      border: 4px solid var(--bg-secondary);
+    }
+    [data-theme="dark"] .timeline-dot { background: var(--clr-light-sage); border-color: var(--bg-secondary); }
+    .timeline-content h4 {
+      font-family: var(--font-serif);
+      font-size: 20px;
+      margin-bottom: 12px;
+    }
+    .timeline-content p { color: var(--text-secondary); font-size: 15px; }
+
+    /* 3. OUR THREE BELIEFS (3-Column) */
+    .section-beliefs { padding: var(--section-py) 0; }
+    .beliefs-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+      margin-top: 60px;
+    }
+    .belief-card {
+      background: var(--bg-secondary);
+      padding: 60px 40px;
+      border-radius: var(--radius-lg);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      border: 1px solid var(--border-color);
+    }
+    .belief-bg-tint {
+      position: absolute;
+      top: -20%; left: -20%;
+      width: 140%; height: 140%;
+      opacity: 0.05;
+      z-index: 0;
+      pointer-events: none;
+    }
+    [data-theme="dark"] .belief-bg-tint { opacity: 0.1; }
+    .belief-card-content {
+      position: relative; z-index: 1;
+    }
+    .belief-num {
+      display: inline-block;
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--clr-deep-green);
+      margin-bottom: 24px;
+      letter-spacing: 0.1em;
+    }
+    [data-theme="dark"] .belief-num { color: var(--clr-light-sage); }
+    .belief-card h3 {
+      font-family: var(--font-display);
+      font-size: 32px;
+      margin-bottom: 16px;
+    }
+    .belief-card p { color: var(--text-secondary); }
+
+    /* 4. MEET THE STUDIO (4 Team Cards) */
+    .section-team {
+      padding: var(--section-py) 0;
+      background: var(--bg-secondary);
+    }
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 32px;
+      margin-top: 60px;
+    }
+    .team-card {
+      text-align: center;
+    }
+    .team-avatar {
+      width: 100%;
+      aspect-ratio: 3/4;
+      background: var(--card-bg);
+      border-radius: var(--radius-sm);
+      margin-bottom: 24px;
+      overflow: hidden;
+      border: 1px solid var(--border-color);
+    }
+    .team-avatar svg { width: 100%; height: 100%; object-fit: cover; }
+    .team-card h4 {
+      font-family: var(--font-serif);
+      font-size: 20px;
+      margin-bottom: 4px;
+    }
+    .team-title {
+      font-size: 13px;
+      color: var(--clr-mid-green);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 16px;
+      display: block;
+    }
+    .team-quote {
+      font-size: 14px;
+      color: var(--text-secondary);
+      font-style: italic;
+    }
+
+    /* 5. RECOGNITION & PRESS */
+    .section-press { padding: var(--section-py) 0; }
+    .press-grid {
+      display: grid;
+      grid-template-rows: auto auto;
+      gap: 60px;
+      margin-top: 60px;
+    }
+    .awards-logos {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 40px;
+      padding-bottom: 60px;
+      border-bottom: 1px solid var(--border-color);
+    }
+    .award-placeholder {
+      font-family: var(--font-display);
+      font-size: 24px;
+      color: var(--text-muted);
+      opacity: 0.6;
+    }
+    .press-quotes {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+    }
+    .press-quote-item {
+      padding: 40px;
+      background: var(--bg-secondary);
+      border-left: 4px solid var(--clr-deep-green);
+    }
+    [data-theme="dark"] .press-quote-item { border-left-color: var(--clr-light-sage); }
+    .press-publication {
+      display: block;
+      font-family: var(--font-sans);
+      font-weight: 600;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 12px;
+    }
+    .press-quote-item p {
+      font-family: var(--font-serif);
+      font-size: 20px;
+      line-height: 1.5;
+    }
+
+    /* 6. FINAL CTA (Warm Personal) */
+    .section-about-cta {
+      padding: 120px 20px;
+      background: var(--clr-stone);
+      color: #fff;
+      text-align: center;
+      position: relative;
+    }
+    [data-theme="dark"] .section-about-cta { background: #2B241A; }
+    .about-cta-content {
+      max-width: 600px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 2;
+    }
+    .about-cta-content h2 {
+      font-family: var(--font-display);
+      font-size: clamp(36px, 5vw, 56px);
+      margin-bottom: 24px;
+      line-height: 1.1;
+    }
+    .about-cta-content p {
+      font-size: 18px;
+      margin-bottom: 40px;
+    }
+    .about-cta-content .btn-primary {
+      background: #fff;
+      color: var(--clr-stone);
+    }
+    [data-theme="dark"] .about-cta-content .btn-primary { color: #2B241A; }
+    .about-cta-content .btn-primary:hover {
+      background: var(--clr-forest);
+      color: #fff;
+    }
+
+    @media (max-width: 1024px) {
+      .about-hero-grid { grid-template-columns: 1fr; text-align: center; }
+      .timeline-container::before { left: 0; }
+      .timeline-item, .timeline-item:nth-child(even) {
+        flex-direction: column; align-items: flex-start;
+      }
+      .timeline-content, .timeline-year { width: 100%; text-align: left !important; padding-left: 40px; }
+      .timeline-dot { left: 0; top: 0; transform: translate(-50%, -10px); }
+      .timeline-year { margin-bottom: 20px; font-size: 32px; }
+      
+      .beliefs-grid, .team-grid { grid-template-columns: 1fr 1fr; }
+      .press-quotes { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 768px) {
+      .beliefs-grid, .team-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="nav-logo" id="logo-link">
+        <div class="logo-icon">
+          <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M50 10C27.9086 10 10 27.9086 10 50C10 72.0914 27.9086 90 50 90C72.0914 90 90 72.0914 90 50C90 27.9086 72.0914 10 50 10Z" stroke="currentColor" stroke-width="2" opacity="0.3"/>
+            <path d="M50 90V60" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+            <path d="M50 60C35 60 25 45 35 30C45 15 55 15 65 30C75 45 65 60 50 60Z" stroke="currentColor" stroke-width="2" fill="currentColor" fill-opacity="0.1"/>
+            <path d="M50 60C42 60 35 50 42 40C48 30 52 30 58 40C65 50 58 60 50 60Z" stroke="currentColor" stroke-width="2"/>
+          </svg>
+        </div>
+        <div class="logo-text">
+          <span class="logo-name">Verdana</span>
+          
+        </div>
+      </a>
+
+      <!-- Navigation Links -->
+      <nav class="nav-links" id="nav-links">
+        <div class="nav-item has-dropdown">
+          <a href="#" class="nav-link dropdown-trigger">Home <span class="caret">▼</span></a>
+          <div class="dropdown-menu">
+            <a href="index.html" class="dropdown-item">Home 1 — Garden</a>
+            <a href="home2.html" class="dropdown-item">Home 2 — Architecture</a>
+          </div>
+        </div>
+        <a href="about.html" class="nav-link active">About</a>
+        <a href="services.html" class="nav-link">Services</a>
+        <a href="portfolio.html" class="nav-link">Portfolio</a>
+        <a href="process.html" class="nav-link">Process</a>
+        <a href="contact.html" class="nav-link">Contact</a>
+      </nav>
+
+      <!-- Controls & CTA -->
+      <div class="nav-controls">
+        <button class="ctrl-btn" id="rtl-toggle" aria-label="Toggle Text Direction">
+          <span id="dir-label">LTR</span>
+        </button>
+        <button class="ctrl-btn" id="theme-toggle" aria-label="Toggle Theme">
+          <span class="theme-icon sun" id="sun-icon"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg></span>
+          <span class="theme-icon moon hidden" id="moon-icon"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg></span>
+        </button>
+        <a href="contact.html" class="btn-primary nav-cta">Book Consultation</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- SECTION 1: HERO (Editorial Wide) -->
+    <section class="section-about-hero">
+      <div class="container">
+        <div class="about-hero-grid">
+          <div class="about-hero-content">
+            <span class="subtitle">Our Story</span>
+            <h1>Rooted in <em>Nature.</em> <br>Built for Life.</h1>
+            <p>Founded on the belief that a garden is a dialogue between architecture and the earth, Verdana Studio crafts landscapes that breathe, evolve, and inspire.</p>
+          </div>
+          <div class="about-hero-visual">
+            <img src="about_hero.png" alt="About Verdana Studio" style="width: 100%; height: 100%; object-fit: cover;" />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 2: OUR STORY (Timeline) -->
+    <section class="section-timeline">
+      <div class="container">
+        <div class="section-header center">
+          <span class="subtitle">Evolution</span>
+          <h2 class="title">Two Decades of <em>Growth</em></h2>
+        </div>
+
+        <div class="timeline-container">
+          <div class="timeline-item">
+            <div class="timeline-content">
+              <h4>The First Seed</h4>
+              <p>Founded by Eleanor & Thomas Vance in a small Cotswolds studio, focusing entirely on native woodland garden restoration.</p>
+            </div>
+            <div class="timeline-dot"></div>
+            <div class="timeline-year">2006</div>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-content">
+              <h4>Architectural Integration</h4>
+              <p>Expanded our practice to include structural hardscaping, partnering with leading residential architects across the UK.</p>
+            </div>
+            <div class="timeline-dot"></div>
+            <div class="timeline-year">2012</div>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-content">
+              <h4>Commercial Estates</h4>
+              <p>Secured our first multi-acre corporate campus project, blending our organic ethos with rigorous large-scale spatial engineering.</p>
+            </div>
+            <div class="timeline-dot"></div>
+            <div class="timeline-year">2018</div>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-content">
+              <h4>A Sustainable Future</h4>
+              <p>Launched our closed-loop sustainability pledge, ensuring 100% of our projects utilize native ecology and smart water systems.</p>
+            </div>
+            <div class="timeline-dot"></div>
+            <div class="timeline-year">2026</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 3: THREE BELIEFS (Cards) -->
+    <section class="section-beliefs">
+      <div class="container">
+        <div class="section-header center">
+          <span class="subtitle">Philosophy</span>
+          <h2 class="title">Our Guiding <em>Principles</em></h2>
+        </div>
+
+        <div class="beliefs-grid">
+          <div class="belief-card">
+            <div class="belief-bg-tint">
+              <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                <path d="M 0 200 Q 100 0 200 200" fill="#2D6A4F" />
+              </svg>
+            </div>
+            <div class="belief-card-content">
+              <span class="belief-num">01.</span>
+              <h3>Endemic Ecology</h3>
+              <p>We do not fight the landscape; we elevate it. By utilizing native flora, our gardens require less intervention and foster local wildlife naturally.</p>
+            </div>
+          </div>
+
+          <div class="belief-card">
+            <div class="belief-bg-tint">
+              <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="100" cy="100" r="100" fill="#B8860B" />
+              </svg>
+            </div>
+            <div class="belief-card-content">
+              <span class="belief-num">02.</span>
+              <h3>Timeless Craft</h3>
+              <p>Trends fade, but stone endures. We design structural elements that patinate beautifully, ensuring the garden looks as though it has always been there.</p>
+            </div>
+          </div>
+
+          <div class="belief-card">
+            <div class="belief-bg-tint">
+              <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                <rect width="200" height="200" fill="#52796F" />
+              </svg>
+            </div>
+            <div class="belief-card-content">
+              <span class="belief-num">03.</span>
+              <h3>Human Sanctuary</h3>
+              <p>A garden must serve its inhabitants. We create secluded corners for reflection, open lawns for play, and terraces designed for human connection.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 4: MEET THE STUDIO -->
+    <section class="section-team">
+      <div class="container">
+        <div class="section-header flex-header">
+          <div>
+            <span class="subtitle">The Team</span>
+            <h2 class="title">Meet the <em>Studio</em></h2>
+          </div>
+        </div>
+
+        <div class="team-grid">
+          <div class="team-card">
+            <div class="team-avatar">
+              <img src="about_avatar1.png" alt="Eleanor Vance" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.7s ease;" />
+            </div>
+            <h4>Eleanor Vance</h4>
+            <span class="team-title">Principal Landscape Architect</span>
+            <p class="team-quote">"A garden is a canvas that paints itself new every season."</p>
+          </div>
+
+          <div class="team-card">
+            <div class="team-avatar">
+              <img src="about_avatar3.png" alt="Thomas Vance" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.7s ease;" />
+            </div>
+            <h4>Thomas Vance</h4>
+            <span class="team-title">Director of Hardscaping</span>
+            <p class="team-quote">"Good structure is silent. You feel it before you see it."</p>
+          </div>
+
+          <div class="team-card">
+            <div class="team-avatar">
+              <img src="about_avatar4.png" alt="Marcus Li" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.7s ease;" />
+            </div>
+            <h4>Marcus Li</h4>
+            <span class="team-title">Senior Planting Designer</span>
+            <p class="team-quote">"Texture and movement are just as important as color."</p>
+          </div>
+
+          <div class="team-card">
+            <div class="team-avatar">
+              <img src="about_avatar2.png" alt="Sarah Jenkins" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.7s ease;" />
+            </div>
+            <h4>Sarah Jenkins</h4>
+            <span class="team-title">Ecological Consultant</span>
+            <p class="team-quote">"We design for humans, but we plant for the ecosystem."</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 5: RECOGNITION & PRESS -->
+    <section class="section-press">
+      <div class="container">
+        <div class="press-grid">
+          <div class="awards-logos">
+            <span class="award-placeholder">Architectural Digest</span>
+            <span class="award-placeholder">The Times</span>
+            <span class="award-placeholder">RHS Chelsea</span>
+            <span class="award-placeholder">Elle Decoration</span>
+          </div>
+          
+          <div class="press-quotes">
+            <div class="press-quote-item">
+              <span class="press-publication">The Telegraph Magazine</span>
+              <p>"Verdana Studio proves that luxury and deep ecological responsibility are not mutually exclusive. Their gardens are masterpieces of restraint."</p>
+            </div>
+            <div class="press-quote-item">
+              <span class="press-publication">Design Anthology</span>
+              <p>"A masterclass in textural planting. The way they blend rigid architectural forms with wild, flowing meadows is unparalleled in modern British design."</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 6: FINAL CTA (Warm Personal) -->
+    <section class="section-about-cta" style="background-image: linear-gradient(rgba(11, 26, 18, 0.4), rgba(11, 26, 18, 0.4)), url('about_cta.png'); background-size: cover; background-position: center; padding: 120px 20px; color: #fff;">
+      <div class="container">
+        <div class="about-cta-content">
+          <h2>We'd Love to Hear <br><em>Your Story.</em></h2>
+          <p>Every great landscape begins with a simple conversation about how you want to live outdoors. Let’s create something beautiful together.</p>
+          <a href="mailto:hello@verdanastudio.com" class="btn-primary">Email the Studio</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+    <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+                <div class="footer-brand">
+          <a href="index.html" class="nav-logo" style="margin-bottom: 24px; text-decoration: none;">
+            <div class="logo-icon">
+              <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M50 10C27.9086 10 10 27.9086 10 50C10 72.0914 27.9086 90 50 90C72.0914 90 90 72.0914 90 50C90 27.9086 72.0914 10 50 10Z" stroke="currentColor" stroke-width="2" opacity="0.3"/>
+                <path d="M50 90V60" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+                <path d="M50 60C35 60 25 45 35 30C45 15 55 15 65 30C75 45 65 60 50 60Z" stroke="currentColor" stroke-width="2" fill="currentColor" fill-opacity="0.1"/>
+                <path d="M50 60C42 60 35 50 42 40C48 30 52 30 58 40C65 50 58 60 50 60Z" stroke="currentColor" stroke-width="2"/>
+              </svg>
+            </div>
+            <div class="logo-text" style="text-align: left;">
+              <span class="logo-name">Verdana</span>
+              
+            </div>
+          </a>
+          <div class="footer-socials">
+            <a href="#" aria-label="Instagram"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg></a>
+            <a href="#" aria-label="Pinterest"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12.017 0C5.396 0 .029 5.367.029 11.987c0 5.079 3.158 9.417 7.618 11.162-.105-.949-.199-2.403.041-3.439.219-.937 1.406-5.957 1.406-5.957s-.359-.72-.359-1.781c0-1.663.967-2.911 2.168-2.911 1.024 0 1.518.769 1.518 1.688 0 1.029-.653 2.567-.992 3.992-.285 1.193.6 2.165 1.775 2.165 2.128 0 3.768-2.245 3.768-5.487 0-2.861-2.063-4.869-5.008-4.869-3.41 0-5.409 2.562-5.409 5.199 0 1.033.394 2.143.889 2.741.099.12.112.225.085.345-.09.375-.293 1.199-.334 1.363-.053.225-.172.271-.401.165-1.495-.69-2.433-2.878-2.433-4.646 0-3.776 2.748-7.252 7.951-7.252 4.168 0 7.41 2.967 7.41 6.923 0 4.135-2.607 7.462-6.233 7.462-1.214 0-2.354-.629-2.758-1.379l-.749 2.848c-.269 1.045-1.004 2.352-1.498 3.146 1.123.345 2.306.535 3.55.535 6.607 0 11.985-5.365 11.985-11.987C23.97 5.367 18.624 0 12.017 0z"/></svg></a>
+            <a href="#" aria-label="LinkedIn"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg></a>
+          </div>
+        </div>
+        <div class="footer-links">
+          <h4>Studio</h4>
+          <a href="index.html">Home</a>
+          <a href="about.html">About Us</a>
+          <a href="portfolio.html">Portfolio</a>
+          <a href="process.html">Our Process</a>
+        </div>
+        <div class="footer-links">
+          <h4>Expertise</h4>
+          <a href="services.html">Services Overview</a>
+          <a href="services.html#garden-design">Garden Design</a>
+          <a href="services.html#hardscaping">Hardscaping</a>
+          <a href="services.html#irrigation">Irrigation</a>
+        </div>
+        <div class="footer-contact">
+          <h4>Connect</h4>
+          <a href="contact.html">Contact Us</a>
+          <a href="mailto:studio@verdanastudio.com">studio@verdanastudio.com</a>
+          <a href="tel:+442078901234">+44 (0) 20 7890 1234</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 Verdana Studio. All rights reserved.</p>
+        <div class="footer-legal">
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms & Conditions</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // RTL / LTR Toggle Logic
+    const rtlToggle = document.getElementById('rtl-toggle');
+    const dirLabel = document.getElementById('dir-label');
+    const htmlElem = document.documentElement;
+    
+    let isRTL = false;
+    rtlToggle.addEventListener('click', () => {
+      isRTL = !isRTL;
+      htmlElem.setAttribute('dir', isRTL ? 'rtl' : 'ltr');
+      dirLabel.textContent = isRTL ? 'RTL' : 'LTR';
+    });
+
+    // Theme Toggle Logic
+    const themeToggle = document.getElementById('theme-toggle');
+    const sunIcon = document.getElementById('sun-icon');
+    const moonIcon = document.getElementById('moon-icon');
+    
+    let isDark = false;
+    themeToggle.addEventListener('click', () => {
+      isDark = !isDark;
+      htmlElem.setAttribute('data-theme', isDark ? 'dark' : 'light');
+      if(isDark) {
+        sunIcon.classList.add('hidden');
+        moonIcon.classList.remove('hidden');
+      } else {
+        sunIcon.classList.remove('hidden');
+        moonIcon.classList.add('hidden');
+      }
+    });
+  </script>
+</body>
+</html>

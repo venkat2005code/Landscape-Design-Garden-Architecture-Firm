@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Contact Verdana Studio — Book a Landscape Architecture Consultation" />
+  <title>Contact Us | Verdana Studio</title>
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Jost:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet" />
+  
+  <link rel="stylesheet" href="styles.css" />
+  
+  <style>
+    /* ============================================================
+       CONTACT PAGE: SPECIFIC STYLES
+       ============================================================ */
+
+    /* 1. HERO (Split Screen Layout) */
+    .section-contact-hero {
+      padding: 0;
+      background: var(--bg-primary);
+    }
+    .split-hero {
+      display: flex;
+      min-height: 100vh;
+      align-items: stretch;
+    }
+    .split-hero-visual {
+      flex: 1.2;
+      position: relative;
+      background: #1A2D23;
+    }
+    .split-hero-visual svg {
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;
+      opacity: 0.7;
+    }
+    .split-hero-overlay {
+      position: relative;
+      z-index: 2;
+      padding: 160px 10% 80px;
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      height: 100%;
+    }
+    .split-hero-overlay .subtitle { color: var(--clr-gold); margin-bottom: 20px; display: inline-block; }
+    .split-hero-overlay h1 {
+      font-family: var(--font-display);
+      font-size: clamp(48px, 6vw, 80px);
+      line-height: 1.1;
+      margin-bottom: 24px;
+    }
+    .split-hero-overlay h1 em { font-family: var(--font-serif); font-style: italic; color: var(--clr-light-sage); }
+    .split-hero-overlay p { font-size: 18px; color: rgba(255,255,255,0.8); margin-bottom: 60px; max-width: 450px; line-height: 1.6; }
+    
+    .direct-contact-methods { display: flex; gap: 40px; flex-wrap: wrap; }
+    .dc-method span { display: block; font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; color: rgba(255,255,255,0.5); margin-bottom: 8px; }
+    .dc-method a { font-family: var(--font-serif); font-size: 24px; font-weight: 500; color: #fff; transition: color 0.3s; text-decoration: none; }
+    .dc-method a:hover { color: var(--clr-gold); }
+
+    .split-hero-form {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 160px 5% 80px;
+      background: var(--bg-primary);
+    }
+    .contact-form-wrapper {
+      width: 100%;
+      max-width: 550px;
+      background: transparent;
+      padding: 0;
+      box-shadow: none;
+      border: none;
+    }
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      margin-bottom: 32px;
+    }
+    .form-group.full { grid-column: span 2; }
+    .form-group label {
+      display: block;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-secondary);
+      margin-bottom: 8px;
+    }
+    .form-group input, .form-group textarea, .form-group select {
+      width: 100%;
+      padding: 16px;
+      border: 1px solid var(--border-color);
+      background: var(--bg-secondary);
+      color: var(--text-primary);
+      border-radius: var(--radius-sm);
+      font-family: var(--font-sans);
+      font-size: 16px;
+    }
+    .form-group textarea { resize: vertical; min-height: 120px; }
+    .form-group input:focus, .form-group textarea:focus, .form-group select:focus {
+      outline: none; border-color: var(--clr-deep-green);
+    }
+    .form-submit-btn { width: 100%; padding: 20px; font-size: 16px; }
+
+    @media (max-width: 1024px) {
+      .split-hero { flex-direction: column; }
+      .split-hero-visual { padding-top: 80px; }
+      .split-hero-form { padding: 80px 5%; }
+    }
+
+    /* 2. WHAT HAPPENS NEXT (3 Steps) */
+    .section-next-steps {
+      padding: 80px 0;
+      background: var(--bg-secondary);
+      border-top: 1px solid var(--border-color);
+    }
+    .steps-horizontal {
+      display: flex;
+      justify-content: space-between;
+      gap: 40px;
+    }
+    .step-box {
+      flex: 1;
+      text-align: center;
+      position: relative;
+    }
+    .step-box:not(:last-child)::after {
+      content: '→';
+      position: absolute;
+      top: 30px;
+      right: -25px;
+      font-size: 24px;
+      color: var(--border-color);
+    }
+    .step-icon {
+      width: 60px; height: 60px;
+      margin: 0 auto 20px;
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 20px; color: var(--clr-deep-green);
+    }
+    [data-theme="dark"] .step-icon { color: var(--clr-light-sage); }
+    .step-box h4 { font-family: var(--font-serif); font-size: 20px; margin-bottom: 8px; }
+    .step-box p { font-size: 14px; color: var(--text-secondary); }
+
+    /* 3. TYPES OF CONSULTATION (3 Cards) */
+    .section-consultations { padding: var(--section-py) 0; }
+    .consult-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+      margin-top: 60px;
+    }
+    .consult-card {
+      background: var(--bg-secondary);
+      padding: 40px;
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+    }
+    .consult-card.featured {
+      border-color: var(--clr-deep-green);
+      background: rgba(45, 106, 79, 0.03);
+    }
+    [data-theme="dark"] .consult-card.featured {
+      border-color: var(--clr-light-sage);
+      background: rgba(132, 169, 140, 0.05);
+    }
+    .consult-card h3 { font-family: var(--font-serif); font-size: 24px; margin-bottom: 16px; }
+    .consult-card p { color: var(--text-secondary); font-size: 15px; margin-bottom: 24px; flex-grow: 1; }
+    .consult-price {
+      display: block;
+      font-weight: 500;
+      color: var(--clr-deep-green);
+      font-size: 18px;
+      margin-top: auto;
+      padding-top: 24px;
+      border-top: 1px solid var(--border-color);
+    }
+    [data-theme="dark"] .consult-price { color: var(--clr-light-sage); }
+
+    /* 4. FREQUENTLY ASKED QUESTIONS (Accordion) */
+    .section-faq {
+      padding: var(--section-py) 0;
+      background: var(--bg-secondary);
+    }
+    .faq-container { max-width: 800px; margin: 60px auto 0; }
+    .faq-item {
+      border-bottom: 1px solid var(--border-color);
+      margin-bottom: 16px;
+    }
+    .faq-question {
+      width: 100%;
+      text-align: left;
+      padding: 24px 0;
+      background: none;
+      border: none;
+      font-family: var(--font-serif);
+      font-size: 20px;
+      color: var(--text-primary);
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .faq-question::after {
+      content: '+';
+      font-size: 24px;
+      font-weight: 300;
+      transition: transform 0.3s;
+    }
+    .faq-item.active .faq-question::after { transform: rotate(45deg); }
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease;
+    }
+    .faq-answer p {
+      padding-bottom: 24px;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+
+    /* 5. STUDIO & LOCATION (2 Col) */
+    .section-location { padding: var(--section-py) 0; }
+    .location-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+    .map-placeholder {
+      width: 100%;
+      height: 400px;
+      background: var(--bg-secondary);
+      border-radius: var(--radius-lg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid var(--border-color);
+      margin-bottom: 32px;
+    }
+    .address-details { display: flex; gap: 60px; }
+    .addr-block h5 { font-size: 13px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--clr-mid-green); margin-bottom: 12px; }
+    .addr-block p { color: var(--text-secondary); line-height: 1.7; }
+    .director-quote {
+      padding: 60px;
+      background: var(--card-bg);
+      border-left: 4px solid var(--clr-gold);
+      border-radius: 0 var(--radius-lg) var(--radius-lg) 0;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.03);
+    }
+    [data-theme="dark"] .director-quote { box-shadow: 0 10px 30px rgba(0,0,0,0.15); }
+    .director-quote p { font-family: var(--font-serif); font-size: 24px; font-style: italic; margin-bottom: 24px; line-height: 1.4; }
+    .director-quote span { font-size: 14px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.1em; }
+
+    /* 6. FINAL CTA (Soft Close) */
+    .section-soft-close {
+      padding: 120px 0;
+      background: var(--clr-forest);
+      color: #fff;
+      text-align: center;
+    }
+    .soft-close-content { max-width: 700px; margin: 0 auto; }
+    .soft-close-icon {
+      width: 80px; height: 80px; margin: 0 auto 32px; opacity: 0.5;
+    }
+    .soft-close-icon svg { width: 100%; height: 100%; }
+    .soft-close-content h2 { font-family: var(--font-display); font-size: clamp(32px, 5vw, 56px); margin-bottom: 24px; line-height: 1.1; }
+    .soft-close-content p { font-size: 18px; color: rgba(255,255,255,0.7); margin-bottom: 40px; }
+    .soft-contacts { display: flex; justify-content: center; gap: 40px; }
+    .soft-contacts a { font-family: var(--font-serif); font-size: 24px; color: var(--clr-gold); transition: color 0.3s; }
+    .soft-contacts a:hover { color: #fff; }
+
+    @media (max-width: 1024px) {
+      .contact-hero-grid, .location-grid { grid-template-columns: 1fr; }
+      .contact-info-sidebar { text-align: center; }
+      .steps-horizontal { flex-direction: column; gap: 32px; }
+      .step-box:not(:last-child)::after { display: none; }
+      .consult-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 768px) {
+      .form-grid { grid-template-columns: 1fr; }
+      .form-group.full { grid-column: span 1; }
+      .contact-form-wrapper, .director-quote { padding: 40px 20px; }
+      .consult-grid { grid-template-columns: 1fr; }
+      .address-details { flex-direction: column; gap: 32px; }
+      .soft-contacts { flex-direction: column; gap: 20px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="nav-logo" id="logo-link">
+        <div class="logo-icon">
+          <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M50 10C27.9086 10 10 27.9086 10 50C10 72.0914 27.9086 90 50 90C72.0914 90 90 72.0914 90 50C90 27.9086 72.0914 10 50 10Z" stroke="currentColor" stroke-width="2" opacity="0.3"/>
+            <path d="M50 90V60" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+            <path d="M50 60C35 60 25 45 35 30C45 15 55 15 65 30C75 45 65 60 50 60Z" stroke="currentColor" stroke-width="2" fill="currentColor" fill-opacity="0.1"/>
+            <path d="M50 60C42 60 35 50 42 40C48 30 52 30 58 40C65 50 58 60 50 60Z" stroke="currentColor" stroke-width="2"/>
+          </svg>
+        </div>
+        <div class="logo-text">
+          <span class="logo-name">Verdana</span>
+          
+        </div>
+      </a>
+
+      <!-- Navigation Links -->
+      <nav class="nav-links" id="nav-links">
+        <div class="nav-item has-dropdown">
+          <a href="#" class="nav-link dropdown-trigger">Home <span class="caret">▼</span></a>
+          <div class="dropdown-menu">
+            <a href="index.html" class="dropdown-item">Home 1 — Garden</a>
+            <a href="home2.html" class="dropdown-item">Home 2 — Architecture</a>
+          </div>
+        </div>
+        <a href="about.html" class="nav-link">About</a>
+        <a href="services.html" class="nav-link">Services</a>
+        <a href="portfolio.html" class="nav-link">Portfolio</a>
+        <a href="process.html" class="nav-link">Process</a>
+        <a href="contact.html" class="nav-link active">Contact</a>
+      </nav>
+
+      <!-- Controls & CTA -->
+      <div class="nav-controls">
+        <button class="ctrl-btn" id="rtl-toggle" aria-label="Toggle Text Direction">
+          <span id="dir-label">LTR</span>
+        </button>
+        <button class="ctrl-btn" id="theme-toggle" aria-label="Toggle Theme">
+          <span class="theme-icon sun" id="sun-icon"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg></span>
+          <span class="theme-icon moon hidden" id="moon-icon"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg></span>
+        </button>
+        <a href="contact.html" class="btn-primary nav-cta">Book Consultation</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- SECTION 1: HERO (Split Screen Layout) -->
+    <section class="section-contact-hero split-hero">
+      
+      <div class="split-hero-visual">
+        <img src="contact_hero.png" alt="Get in Touch" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; filter: brightness(0.4);" />
+        <div class="split-hero-overlay">
+          <span class="subtitle">Get in Touch</span>
+          <h1>Let’s Discuss <br><em>Your Space.</em></h1>
+          <p>Whether you have a specific brief or just an initial idea, we are always happy to discuss how we can bring your landscape to life.</p>
+          
+          <div class="direct-contact-methods">
+            <div class="dc-method">
+              <span>New Enquiries</span>
+              <a href="mailto:studio@verdanastudio.com">studio@verdanastudio.com</a>
+            </div>
+            <div class="dc-method">
+              <span>Call the Studio</span>
+              <a href="tel:+442078901234">+44 (0) 20 7890 1234</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="split-hero-form">
+        <div class="contact-form-wrapper">
+          <form id="main-contact-form" onsubmit="event.preventDefault(); alert('Enquiry Sent Successfully!');">
+            <div class="form-grid">
+              <div class="form-group">
+                <label>First Name</label>
+                <input type="text" required placeholder="Jane" />
+              </div>
+              <div class="form-group">
+                <label>Last Name</label>
+                <input type="text" required placeholder="Doe" />
+              </div>
+              <div class="form-group">
+                <label>Email Address</label>
+                <input type="email" required placeholder="jane@example.com" />
+              </div>
+              <div class="form-group">
+                <label>Phone Number</label>
+                <input type="tel" placeholder="+44 7000 000000" />
+              </div>
+              <div class="form-group full">
+                <label>Project Type</label>
+                <select required>
+                  <option value="">Please select...</option>
+                  <option value="residential">Residential Garden Design</option>
+                  <option value="estate">Country Estate Masterplan</option>
+                  <option value="commercial">Commercial / Public Realm</option>
+                  <option value="consultancy">Expert Consultancy Only</option>
+                </select>
+              </div>
+              <div class="form-group full">
+                <label>Project Details & Location</label>
+                <textarea required placeholder="Tell us briefly about your property, location, and what you hope to achieve..."></textarea>
+              </div>
+            </div>
+            <button type="submit" class="btn-primary form-submit-btn">Send Enquiry</button>
+          </form>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- SECTION 2: WHAT HAPPENS NEXT (3 Steps) -->
+    <section class="section-next-steps">
+      <div class="container">
+        <div class="steps-horizontal">
+          <div class="step-box">
+            <div class="step-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg></div>
+            <h4>1. We Review</h4>
+            <p>Our senior design team reviews your brief to ensure we are the right fit for your project scope and budget.</p>
+          </div>
+          <div class="step-box">
+            <div class="step-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg></div>
+            <h4>2. Discovery Call</h4>
+            <p>We'll arrange a 20-minute introductory call to discuss your vision, timeline, and our process in detail.</p>
+          </div>
+          <div class="step-box">
+            <div class="step-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg></div>
+            <h4>3. Site Visit</h4>
+            <p>If we proceed, we'll schedule a comprehensive on-site consultation to analyze the land and take initial measurements.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 3: TYPES OF CONSULTATION (3 Choice Cards) -->
+    <section class="section-consultations">
+      <div class="container">
+        <div class="section-header center">
+          <span class="subtitle">Consultation Options</span>
+          <h2 class="title">How to <em>Begin</em></h2>
+        </div>
+
+        <div class="consult-grid">
+          <div class="consult-card">
+            <h3>Virtual Review</h3>
+            <p>A 45-minute video call to discuss your garden's potential using photographs and satellite imagery. Ideal for early-stage planning.</p>
+            <span class="consult-price">Complimentary</span>
+          </div>
+          <div class="consult-card featured">
+            <h3>On-Site Consultation</h3>
+            <p>A 2-hour deep dive at your property with a Senior Landscape Architect. We will discuss spatial planning, soil conditions, and initial structural ideas.</p>
+            <span class="consult-price">£350 (Deducted from design fee)</span>
+          </div>
+          <div class="consult-card">
+            <h3>Design-Only Retainer</h3>
+            <p>For international clients or those with their own contractors. We provide full CAD masterplans, planting schedules, and technical drawings remotely.</p>
+            <span class="consult-price">Scopes from £3,500</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 4: FREQUENTLY ASKED QUESTIONS (Accordion) -->
+    <section class="section-faq">
+      <div class="container">
+        <div class="section-header center">
+          <span class="subtitle">Clarity</span>
+          <h2 class="title">Common <em>Questions</em></h2>
+        </div>
+
+        <div class="faq-container">
+          <div class="faq-item">
+            <button class="faq-question">What is the typical timeline for a residential project?</button>
+            <div class="faq-answer">
+              <p>For a standard residential garden, the design phase typically takes 6-8 weeks. Once approved, tendering and construction can take between 4-12 weeks depending on the complexity of hardscaping and time of year.</p>
+            </div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-question">Do you manage the construction phase?</button>
+            <div class="faq-answer">
+              <p>Yes. We strongly recommend using our in-house project management service. We work with a trusted network of specialist contractors and oversee the build from ground-breaking to final planting, ensuring the design is executed flawlessly.</p>
+            </div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-question">At what stage of a house build should we contact you?</button>
+            <div class="faq-answer">
+              <p>As early as possible. Involving a landscape architect during the architectural planning stage ensures that sightlines, indoor-outdoor flow, and essential groundworks (like drainage and cabling) are integrated seamlessly, saving time and money.</p>
+            </div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-question">Do you take on projects outside the UK?</button>
+            <div class="faq-answer">
+              <p>Yes. For international projects, we generally operate on a "Design & Consultancy" basis, where we produce the masterplan and technical drawings, and oversee the work of local contractors through scheduled site visits.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 5: STUDIO & LOCATION (2 Col) -->
+    <section class="section-location">
+      <div class="container">
+        <div class="location-grid">
+          <div>
+            <div class="map-placeholder">
+              <iframe width="100%" height="100%" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://www.openstreetmap.org/export/embed.html?bbox=-1.57,51.93,-1.52,51.96&amp;layer=mapnik" style="border: 0; border-radius: var(--radius-lg); filter: grayscale(80%) sepia(30%) hue-rotate(70deg);"></iframe>
+            </div>
+            <div class="address-details">
+              <div class="addr-block">
+                <h5>Our Studio</h5>
+                <p>The Old Barn, Willow Lane<br>Chipping Norton<br>Oxfordshire, OX7 5NJ<br>United Kingdom</p>
+              </div>
+              <div class="addr-block">
+                <h5>Hours</h5>
+                <p>Monday - Friday<br>9:00 AM - 5:30 PM<br><em>Visits by appointment only.</em></p>
+              </div>
+            </div>
+          </div>
+          
+          <div class="director-quote">
+            <p>"We intentionally keep our studio small and our project list highly curated. This allows us to dedicate the time, thought, and obsession required to build landscapes of true permanence."</p>
+            <span>— Eleanor Vance, Founder</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 6: FINAL CTA (Soft Close) -->
+    <section class="section-soft-close" style="background: linear-gradient(rgba(11, 26, 18, 0.7), rgba(11, 26, 18, 0.7)), url(contact_cta_bg.png) center/cover no-repeat;">
+      <div class="container">
+        <div class="soft-close-content">
+          <div class="soft-close-icon">
+            <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+              <path d="M 50 100 Q 50 50 10 20 Q 50 0 90 20 Q 50 50 50 100" fill="currentColor" />
+            </svg>
+          </div>
+          <h2>Every Great Garden Starts <br>With a <em>Conversation.</em></h2>
+          <p>If you're not ready to fill out a brief, simply drop us an email or give us a call. We are always happy to talk about plants, stone, and possibilities.</p>
+          <div class="soft-contacts">
+            <a href="mailto:hello@verdanastudio.com">hello@verdanastudio.com</a>
+            <a href="tel:+442078901234">+44 (0) 20 7890 1234</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+    <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+                <div class="footer-brand">
+          <a href="index.html" class="nav-logo" style="margin-bottom: 24px; text-decoration: none;">
+            <div class="logo-icon">
+              <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M50 10C27.9086 10 10 27.9086 10 50C10 72.0914 27.9086 90 50 90C72.0914 90 90 72.0914 90 50C90 27.9086 72.0914 10 50 10Z" stroke="currentColor" stroke-width="2" opacity="0.3"/>
+                <path d="M50 90V60" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+                <path d="M50 60C35 60 25 45 35 30C45 15 55 15 65 30C75 45 65 60 50 60Z" stroke="currentColor" stroke-width="2" fill="currentColor" fill-opacity="0.1"/>
+                <path d="M50 60C42 60 35 50 42 40C48 30 52 30 58 40C65 50 58 60 50 60Z" stroke="currentColor" stroke-width="2"/>
+              </svg>
+            </div>
+            <div class="logo-text" style="text-align: left;">
+              <span class="logo-name">Verdana</span>
+              
+            </div>
+          </a>
+          <div class="footer-socials">
+            <a href="#" aria-label="Instagram"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg></a>
+            <a href="#" aria-label="Pinterest"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12.017 0C5.396 0 .029 5.367.029 11.987c0 5.079 3.158 9.417 7.618 11.162-.105-.949-.199-2.403.041-3.439.219-.937 1.406-5.957 1.406-5.957s-.359-.72-.359-1.781c0-1.663.967-2.911 2.168-2.911 1.024 0 1.518.769 1.518 1.688 0 1.029-.653 2.567-.992 3.992-.285 1.193.6 2.165 1.775 2.165 2.128 0 3.768-2.245 3.768-5.487 0-2.861-2.063-4.869-5.008-4.869-3.41 0-5.409 2.562-5.409 5.199 0 1.033.394 2.143.889 2.741.099.12.112.225.085.345-.09.375-.293 1.199-.334 1.363-.053.225-.172.271-.401.165-1.495-.69-2.433-2.878-2.433-4.646 0-3.776 2.748-7.252 7.951-7.252 4.168 0 7.41 2.967 7.41 6.923 0 4.135-2.607 7.462-6.233 7.462-1.214 0-2.354-.629-2.758-1.379l-.749 2.848c-.269 1.045-1.004 2.352-1.498 3.146 1.123.345 2.306.535 3.55.535 6.607 0 11.985-5.365 11.985-11.987C23.97 5.367 18.624 0 12.017 0z"/></svg></a>
+            <a href="#" aria-label="LinkedIn"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg></a>
+          </div>
+        </div>
+        <div class="footer-links">
+          <h4>Studio</h4>
+          <a href="index.html">Home</a>
+          <a href="about.html">About Us</a>
+          <a href="portfolio.html">Portfolio</a>
+          <a href="process.html">Our Process</a>
+        </div>
+        <div class="footer-links">
+          <h4>Expertise</h4>
+          <a href="services.html">Services Overview</a>
+          <a href="services.html#garden-design">Garden Design</a>
+          <a href="services.html#hardscaping">Hardscaping</a>
+          <a href="services.html#irrigation">Irrigation</a>
+        </div>
+        <div class="footer-contact">
+          <h4>Connect</h4>
+          <a href="contact.html">Contact Us</a>
+          <a href="mailto:studio@verdanastudio.com">studio@verdanastudio.com</a>
+          <a href="tel:+442078901234">+44 (0) 20 7890 1234</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 Verdana Studio. All rights reserved.</p>
+        <div class="footer-legal">
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms & Conditions</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // RTL / LTR Toggle Logic
+    const rtlToggle = document.getElementById('rtl-toggle');
+    const dirLabel = document.getElementById('dir-label');
+    const htmlElem = document.documentElement;
+    
+    let isRTL = false;
+    rtlToggle.addEventListener('click', () => {
+      isRTL = !isRTL;
+      htmlElem.setAttribute('dir', isRTL ? 'rtl' : 'ltr');
+      dirLabel.textContent = isRTL ? 'RTL' : 'LTR';
+    });
+
+    // Theme Toggle Logic
+    const themeToggle = document.getElementById('theme-toggle');
+    const sunIcon = document.getElementById('sun-icon');
+    const moonIcon = document.getElementById('moon-icon');
+    
+    let isDark = false;
+    themeToggle.addEventListener('click', () => {
+      isDark = !isDark;
+      htmlElem.setAttribute('data-theme', isDark ? 'dark' : 'light');
+      if(isDark) {
+        sunIcon.classList.add('hidden');
+        moonIcon.classList.remove('hidden');
+      } else {
+        sunIcon.classList.remove('hidden');
+        moonIcon.classList.add('hidden');
+      }
+    });
+
+    // FAQ Accordion Logic
+    const faqs = document.querySelectorAll('.faq-item');
+    faqs.forEach(faq => {
+      const btn = faq.querySelector('.faq-question');
+      btn.addEventListener('click', () => {
+        const isActive = faq.classList.contains('active');
+        
+        // Close all others
+        faqs.forEach(f => {
+          f.classList.remove('active');
+          f.querySelector('.faq-answer').style.maxHeight = null;
+        });
+
+        if (!isActive) {
+          faq.classList.add('active');
+          const answer = faq.querySelector('.faq-answer');
+          answer.style.maxHeight = answer.scrollHeight + "px";
+        }
+      });
+    });
+  </script>
+</body>
+</html>

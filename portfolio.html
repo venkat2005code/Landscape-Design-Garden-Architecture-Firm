@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Verdana Studio Portfolio — Selected Works and Transformations" />
+  <title>Portfolio | Verdana Studio</title>
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Jost:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet" />
+  
+  <link rel="stylesheet" href="styles.css" />
+  
+  <style>
+    /* ============================================================
+       PORTFOLIO PAGE: SPECIFIC STYLES
+       ============================================================ */
+
+    /* 1. HERO (Oversized Headline & Filter Pills) */
+    .section-portfolio-hero {
+      padding: 140px 0 80px;
+      background: var(--bg-primary);
+      text-align: center;
+      border-bottom: 1px solid var(--border-color);
+    }
+    .portfolio-hero-title {
+      font-family: var(--font-display);
+      font-size: clamp(56px, 8vw, 110px);
+      line-height: 1;
+      margin-bottom: 40px;
+      color: #fff;
+    }
+    [data-theme="dark"] .portfolio-hero-title { color: #fff; }
+    .portfolio-hero-title em {
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-weight: 300;
+    }
+    .filter-pills {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 12px;
+    }
+    .filter-btn {
+      padding: 10px 24px;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      border-radius: 100px;
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text-secondary);
+      transition: all 0.3s;
+    }
+    .filter-btn:hover, .filter-btn.active {
+      background: var(--clr-deep-green);
+      color: #fff;
+      border-color: var(--clr-deep-green);
+    }
+    [data-theme="dark"] .filter-btn:hover, [data-theme="dark"] .filter-btn.active {
+      background: var(--clr-light-sage);
+      color: #fff;
+      border-color: var(--clr-light-sage);
+    }
+
+    /* 2. PROJECT GALLERY (Bento Grid) */
+    .section-gallery {
+      padding: 80px 0 var(--section-py);
+      background: var(--bg-primary);
+    }
+    .bento-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      grid-template-rows: repeat(2, 350px);
+      gap: 24px;
+    }
+    .bento-item {
+      position: relative;
+      border-radius: var(--radius-sm);
+      overflow: hidden;
+      cursor: pointer;
+      background: var(--card-bg);
+      /* Default sizes */
+      grid-column: span 1;
+    }
+    /* Specific sizes for 5 projects to make a Bento layout */
+    .bento-item:nth-child(1) { grid-column: span 2; grid-row: span 2; } /* Large Hero Project */
+    .bento-item:nth-child(2) { grid-column: span 2; grid-row: span 1; } /* Wide Project */
+    .bento-item:nth-child(3) { grid-column: span 1; grid-row: span 1; } /* Standard */
+    .bento-item:nth-child(4) { grid-column: span 1; grid-row: span 1; } /* Standard */
+    /* Add a 5th item if needed, but 4 fits perfectly in the remaining slots. Let's adjust to fit 5 items */
+    /* Wait, 2+2=4 cols for row 1. Row 2: item 1 takes 2 cols, so 2 cols left. Item 3 and 4 take 1 each. So that's 4 items. Let's add a 5th.
+       Let's use a 3-column grid for easier 5 item masonry: */
+    
+    .bento-grid {
+      grid-template-columns: repeat(3, 1fr);
+      grid-auto-rows: 350px;
+    }
+    .bento-item:nth-child(1) { grid-column: span 2; grid-row: span 2; }
+    .bento-item:nth-child(2) { grid-column: span 1; grid-row: span 1; }
+    .bento-item:nth-child(3) { grid-column: span 1; grid-row: span 1; }
+    .bento-item:nth-child(4) { grid-column: span 2; grid-row: span 1; }
+    .bento-item:nth-child(5) { grid-column: span 1; grid-row: span 1; }
+
+    .bento-visual {
+      width: 100%; height: 100%;
+    }
+    .bento-visual svg { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s ease; }
+    .bento-overlay {
+      position: absolute;
+      bottom: 0; left: 0; width: 100%;
+      padding: 40px;
+      background: linear-gradient(to top, rgba(11,26,18,0.9) 0%, transparent 100%);
+      color: #fff;
+      transform: translateY(20px);
+      opacity: 0;
+      transition: all 0.4s ease;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+    }
+    .bento-item:hover .bento-overlay { transform: translateY(0); opacity: 1; }
+    .bento-item:hover .bento-visual svg { transform: scale(1.05); }
+    .bento-overlay .cat-tag {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--clr-gold);
+      margin-bottom: 8px;
+    }
+    .bento-overlay h3 {
+      font-family: var(--font-serif);
+      font-size: 28px;
+      margin: 0;
+    }
+
+    /* 3. PROJECT SPOTLIGHT (Magazine Layout) */
+    .section-spotlight {
+      padding: var(--section-py) 0;
+      background: var(--bg-secondary);
+      border-top: 1px solid var(--border-color);
+    }
+    .spotlight-grid {
+      display: grid;
+      grid-template-columns: 3fr 2fr;
+      gap: 60px;
+      align-items: center;
+    }
+    .spotlight-visual {
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      aspect-ratio: 4/3;
+    }
+    .spotlight-visual svg { width: 100%; height: 100%; object-fit: cover; }
+    .spotlight-content h2 {
+      font-family: var(--font-display);
+      font-size: clamp(36px, 5vw, 56px);
+      line-height: 1.1;
+      margin-bottom: 24px;
+    }
+    .spotlight-content p {
+      font-size: 16px;
+      color: var(--text-secondary);
+      margin-bottom: 24px;
+      line-height: 1.7;
+    }
+    .spotlight-stats {
+      display: flex;
+      gap: 32px;
+      margin-top: 40px;
+      padding-top: 32px;
+      border-top: 1px solid var(--border-color);
+    }
+    .stat-item h5 {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--clr-mid-green);
+      margin-bottom: 4px;
+    }
+    .stat-item span {
+      font-family: var(--font-serif);
+      font-size: 24px;
+      font-weight: 500;
+    }
+
+    /* 4. FLIPPED SPOTLIGHT */
+    .section-spotlight.flipped {
+      background: var(--bg-primary);
+    }
+    .section-spotlight.flipped .spotlight-grid {
+      grid-template-columns: 2fr 3fr;
+    }
+    .section-spotlight.flipped .spotlight-visual {
+      order: 2; /* Move to right */
+    }
+    .section-spotlight.flipped .spotlight-content {
+      order: 1; /* Move to left */
+    }
+
+    /* 5. PROJECT NUMBERS (Counters) */
+    .section-counters {
+      padding: 100px 0;
+      background: var(--clr-forest);
+      color: #fff;
+      text-align: center;
+    }
+    .counters-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 40px;
+    }
+    .counter-block {
+      padding: 20px;
+    }
+    .counter-num {
+      font-family: var(--font-display);
+      font-size: 80px;
+      line-height: 1;
+      color: var(--clr-gold);
+      margin-bottom: 12px;
+    }
+    .counter-label {
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: rgba(255,255,255,0.7);
+    }
+
+    /* 6. FINAL CTA (Split: Quote & Mini-Form) */
+    .section-portfolio-cta {
+      padding: var(--section-py) 0;
+      background: var(--bg-secondary);
+    }
+    .cta-split-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 60px;
+    }
+    .cta-quote h2 {
+      font-family: var(--font-display);
+      font-size: 48px;
+      line-height: 1.1;
+      margin-bottom: 24px;
+    }
+    .cta-quote p {
+      font-family: var(--font-serif);
+      font-size: 24px;
+      font-style: italic;
+      color: var(--clr-deep-green);
+    }
+    [data-theme="dark"] .cta-quote p { color: var(--clr-light-sage); }
+    
+    .cta-form {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .cta-form input {
+      padding: 16px 20px;
+      border: 1px solid var(--border-color);
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      border-radius: var(--radius-sm);
+      font-family: var(--font-sans);
+      font-size: 16px;
+    }
+    .cta-form input:focus {
+      outline: none;
+      border-color: var(--clr-deep-green);
+    }
+    .cta-form button {
+      padding: 16px;
+      font-size: 16px;
+      width: 100%;
+      margin-top: 8px;
+    }
+
+    @media (max-width: 1024px) {
+      .bento-grid { grid-template-columns: repeat(2, 1fr); grid-auto-rows: 250px; }
+      .bento-item:nth-child(1), .bento-item:nth-child(4) { grid-column: span 2; }
+      .spotlight-grid, .section-spotlight.flipped .spotlight-grid { grid-template-columns: 1fr; }
+      .section-spotlight.flipped .spotlight-visual { order: -1; }
+      .section-spotlight.flipped .spotlight-content { order: 0; }
+      .counters-grid { grid-template-columns: repeat(2, 1fr); }
+      .cta-split-grid { grid-template-columns: 1fr; padding: 40px 20px; }
+    }
+    @media (max-width: 768px) {
+      .bento-grid { grid-template-columns: 1fr; }
+      .bento-item { grid-column: span 1 !important; grid-row: span 1 !important; }
+      .counters-grid { grid-template-columns: 1fr; gap: 60px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="nav-logo" id="logo-link">
+        <div class="logo-icon">
+          <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M50 10C27.9086 10 10 27.9086 10 50C10 72.0914 27.9086 90 50 90C72.0914 90 90 72.0914 90 50C90 27.9086 72.0914 10 50 10Z" stroke="currentColor" stroke-width="2" opacity="0.3"/>
+            <path d="M50 90V60" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+            <path d="M50 60C35 60 25 45 35 30C45 15 55 15 65 30C75 45 65 60 50 60Z" stroke="currentColor" stroke-width="2" fill="currentColor" fill-opacity="0.1"/>
+            <path d="M50 60C42 60 35 50 42 40C48 30 52 30 58 40C65 50 58 60 50 60Z" stroke="currentColor" stroke-width="2"/>
+          </svg>
+        </div>
+        <div class="logo-text">
+          <span class="logo-name">Verdana</span>
+          
+        </div>
+      </a>
+
+      <!-- Navigation Links -->
+      <nav class="nav-links" id="nav-links">
+        <div class="nav-item has-dropdown">
+          <a href="#" class="nav-link dropdown-trigger">Home <span class="caret">▼</span></a>
+          <div class="dropdown-menu">
+            <a href="index.html" class="dropdown-item">Home 1 — Garden</a>
+            <a href="home2.html" class="dropdown-item">Home 2 — Architecture</a>
+          </div>
+        </div>
+        <a href="about.html" class="nav-link">About</a>
+        <a href="services.html" class="nav-link">Services</a>
+        <a href="portfolio.html" class="nav-link active">Portfolio</a>
+        <a href="process.html" class="nav-link">Process</a>
+        <a href="contact.html" class="nav-link">Contact</a>
+      </nav>
+
+      <!-- Controls & CTA -->
+      <div class="nav-controls">
+        <button class="ctrl-btn" id="rtl-toggle" aria-label="Toggle Text Direction">
+          <span id="dir-label">LTR</span>
+        </button>
+        <button class="ctrl-btn" id="theme-toggle" aria-label="Toggle Theme">
+          <span class="theme-icon sun" id="sun-icon"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg></span>
+          <span class="theme-icon moon hidden" id="moon-icon"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg></span>
+        </button>
+        <a href="contact.html" class="btn-primary nav-cta">Book Consultation</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- SECTION 1: HERO (Oversized Headline & Filters) -->
+    <section class="section-portfolio-hero" style="background: linear-gradient(rgba(11, 26, 18, 0.6), rgba(11, 26, 18, 0.6)), url(portfolio_hero.png) center/cover no-repeat;">
+      <div class="container">
+        <h1 class="portfolio-hero-title">Selected <em>Works</em></h1>
+        <div class="filter-pills">
+          <button class="filter-btn active" onclick="filterGallery('all')">All Projects</button>
+          <button class="filter-btn" onclick="filterGallery('gardens')">Garden Design</button>
+          <button class="filter-btn" onclick="filterGallery('hardscape')">Hardscape</button>
+          <button class="filter-btn" onclick="filterGallery('estates')">Estates</button>
+          <button class="filter-btn" onclick="filterGallery('commercial')">Commercial</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 2: PROJECT GALLERY (Bento Grid) -->
+    <section class="section-gallery">
+      <div class="container">
+        <div class="bento-grid" id="portfolio-grid">
+          
+          <!-- Item 1 (Large) -->
+          <div class="bento-item" data-cat="estates">
+            <div class="bento-visual">
+              <img src="portfolio_bento1.png" alt="The Harrington Estate" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.7s ease;" />
+            </div>
+            <div class="bento-overlay">
+              <span class="cat-tag">Private Estate</span>
+              <h3>The Harrington Estate</h3>
+            </div>
+          </div>
+
+          <!-- Item 2 -->
+          <div class="bento-item" data-cat="gardens">
+            <div class="bento-visual">
+              <img src="portfolio_bento2.png" alt="Chelsea Townhouse" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.7s ease;" />
+            </div>
+            <div class="bento-overlay">
+              <span class="cat-tag">Courtyard Garden</span>
+              <h3>Chelsea Townhouse</h3>
+            </div>
+          </div>
+
+          <!-- Item 3 -->
+          <div class="bento-item" data-cat="commercial">
+            <div class="bento-visual">
+              <img src="portfolio_bento3.png" alt="Nexus Tech Campus" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.7s ease;" />
+            </div>
+            <div class="bento-overlay">
+              <span class="cat-tag">Commercial</span>
+              <h3>Nexus Tech Campus</h3>
+            </div>
+          </div>
+
+          <!-- Item 4 (Wide) -->
+          <div class="bento-item" data-cat="hardscape">
+            <div class="bento-visual">
+              <img src="portfolio_bento4.png" alt="Moorlands Terrace" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.7s ease;" />
+            </div>
+            <div class="bento-overlay">
+              <span class="cat-tag">Hardscaping</span>
+              <h3>Moorlands Terrace</h3>
+            </div>
+          </div>
+
+          <!-- Item 5 -->
+          <div class="bento-item" data-cat="gardens">
+            <div class="bento-visual">
+              <img src="portfolio_bento5.png" alt="Surrey Hills Retreat" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.7s ease;" />
+            </div>
+            <div class="bento-overlay">
+              <span class="cat-tag">Water Feature</span>
+              <h3>Surrey Hills Retreat</h3>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 3: PROJECT SPOTLIGHT (Magazine) -->
+    <section class="section-spotlight">
+      <div class="container">
+        <span class="subtitle">Spotlight</span>
+        <div class="spotlight-grid">
+          <div class="spotlight-visual">
+            <img src="portfolio_spotlight1.png" alt="The Harrington Estate Details" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.7s ease;" />
+          </div>
+          <div class="spotlight-content">
+            <h2>The Harrington <em>Estate</em></h2>
+            <p>A multi-year restoration project of a historic 18th-century country estate. The brief was to reinstate the lost formal parterres near the house while transitioning into wild, endemic meadows as the property met the surrounding woodland.</p>
+            <p>We designed a bespoke Yorkstone terrace that steps gracefully down to a newly engineered lake, creating a seamless visual flow from the classical architecture to the organic landscape.</p>
+            
+            <div class="spotlight-stats">
+              <div class="stat-item">
+                <h5>Scale</h5>
+                <span>12 Acres</span>
+              </div>
+              <div class="stat-item">
+                <h5>Duration</h5>
+                <span>24 Months</span>
+              </div>
+              <div class="stat-item">
+                <h5>Planted</h5>
+                <span>15,000+</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 4: FLIPPED SPOTLIGHT -->
+    <section class="section-spotlight flipped">
+      <div class="container">
+        <span class="subtitle">Commercial Spotlight</span>
+        <div class="spotlight-grid">
+          <div class="spotlight-content">
+            <h2>Nexus Tech <em>Campus</em></h2>
+            <p>Our largest public realm project to date. Nexus required an outdoor environment that actively promoted employee wellness, collaboration, and biodiversity within a dense urban context.</p>
+            <p>The solution was a highly structured grid of sunken courtyards, connected by elevated walkways through mature pleached trees. A state-of-the-art smart irrigation system reuses 100% of the site's rainwater runoff.</p>
+            
+            <div class="spotlight-stats">
+              <div class="stat-item">
+                <h5>Scale</h5>
+                <span>80k sq ft</span>
+              </div>
+              <div class="stat-item">
+                <h5>Trees Planted</h5>
+                <span>240</span>
+              </div>
+              <div class="stat-item">
+                <h5>Award</h5>
+                <span>BALI 2024</span>
+              </div>
+            </div>
+          </div>
+          <div class="spotlight-visual">
+            <img src="portfolio_spotlight2.png" alt="Nexus Tech Campus Details" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.7s ease;" />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 5: PROJECT NUMBERS (Counters) -->
+    <section class="section-counters">
+      <div class="container">
+        <div class="counters-grid" id="counters-grid">
+          <div class="counter-block">
+            <div class="counter-num" data-target="320">0</div>
+            <div class="counter-label">Projects Completed</div>
+          </div>
+          <div class="counter-block">
+            <div class="counter-num" data-target="15">0</div>
+            <div class="counter-label">Industry Awards</div>
+          </div>
+          <div class="counter-block">
+            <div class="counter-num" data-target="850">0</div>
+            <div class="counter-label">Acres Designed</div>
+          </div>
+          <div class="counter-block">
+            <div class="counter-num" data-target="18">0</div>
+            <div class="counter-label">Years of Mastery</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 6: FINAL CTA (Split Form) -->
+    <section class="section-portfolio-cta">
+      <div class="container">
+        <div class="cta-split-grid">
+          <div class="cta-quote">
+            <h2>Your Project <br><em>Could Be Next.</em></h2>
+            <p>"We take on a limited number of projects each year to ensure uncompromising quality."</p>
+          </div>
+          <div class="cta-form-container">
+            <form class="cta-form" onsubmit="event.preventDefault(); alert('Request sent!');">
+              <input type="text" placeholder="Your Name" required />
+              <input type="email" placeholder="Your Email Address" required />
+              <input type="text" placeholder="Project Location / Postcode" required />
+              <button type="submit" class="btn-primary">Request Consultation</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+    <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+                <div class="footer-brand">
+          <a href="index.html" class="nav-logo" style="margin-bottom: 24px; text-decoration: none;">
+            <div class="logo-icon">
+              <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M50 10C27.9086 10 10 27.9086 10 50C10 72.0914 27.9086 90 50 90C72.0914 90 90 72.0914 90 50C90 27.9086 72.0914 10 50 10Z" stroke="currentColor" stroke-width="2" opacity="0.3"/>
+                <path d="M50 90V60" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+                <path d="M50 60C35 60 25 45 35 30C45 15 55 15 65 30C75 45 65 60 50 60Z" stroke="currentColor" stroke-width="2" fill="currentColor" fill-opacity="0.1"/>
+                <path d="M50 60C42 60 35 50 42 40C48 30 52 30 58 40C65 50 58 60 50 60Z" stroke="currentColor" stroke-width="2"/>
+              </svg>
+            </div>
+            <div class="logo-text" style="text-align: left;">
+              <span class="logo-name">Verdana</span>
+              
+            </div>
+          </a>
+          <div class="footer-socials">
+            <a href="#" aria-label="Instagram"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg></a>
+            <a href="#" aria-label="Pinterest"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12.017 0C5.396 0 .029 5.367.029 11.987c0 5.079 3.158 9.417 7.618 11.162-.105-.949-.199-2.403.041-3.439.219-.937 1.406-5.957 1.406-5.957s-.359-.72-.359-1.781c0-1.663.967-2.911 2.168-2.911 1.024 0 1.518.769 1.518 1.688 0 1.029-.653 2.567-.992 3.992-.285 1.193.6 2.165 1.775 2.165 2.128 0 3.768-2.245 3.768-5.487 0-2.861-2.063-4.869-5.008-4.869-3.41 0-5.409 2.562-5.409 5.199 0 1.033.394 2.143.889 2.741.099.12.112.225.085.345-.09.375-.293 1.199-.334 1.363-.053.225-.172.271-.401.165-1.495-.69-2.433-2.878-2.433-4.646 0-3.776 2.748-7.252 7.951-7.252 4.168 0 7.41 2.967 7.41 6.923 0 4.135-2.607 7.462-6.233 7.462-1.214 0-2.354-.629-2.758-1.379l-.749 2.848c-.269 1.045-1.004 2.352-1.498 3.146 1.123.345 2.306.535 3.55.535 6.607 0 11.985-5.365 11.985-11.987C23.97 5.367 18.624 0 12.017 0z"/></svg></a>
+            <a href="#" aria-label="LinkedIn"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg></a>
+          </div>
+        </div>
+        <div class="footer-links">
+          <h4>Studio</h4>
+          <a href="index.html">Home</a>
+          <a href="about.html">About Us</a>
+          <a href="portfolio.html">Portfolio</a>
+          <a href="process.html">Our Process</a>
+        </div>
+        <div class="footer-links">
+          <h4>Expertise</h4>
+          <a href="services.html">Services Overview</a>
+          <a href="services.html#garden-design">Garden Design</a>
+          <a href="services.html#hardscaping">Hardscaping</a>
+          <a href="services.html#irrigation">Irrigation</a>
+        </div>
+        <div class="footer-contact">
+          <h4>Connect</h4>
+          <a href="contact.html">Contact Us</a>
+          <a href="mailto:studio@verdanastudio.com">studio@verdanastudio.com</a>
+          <a href="tel:+442078901234">+44 (0) 20 7890 1234</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 Verdana Studio. All rights reserved.</p>
+        <div class="footer-legal">
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms & Conditions</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // RTL / LTR Toggle Logic
+    const rtlToggle = document.getElementById('rtl-toggle');
+    const dirLabel = document.getElementById('dir-label');
+    const htmlElem = document.documentElement;
+    
+    let isRTL = false;
+    rtlToggle.addEventListener('click', () => {
+      isRTL = !isRTL;
+      htmlElem.setAttribute('dir', isRTL ? 'rtl' : 'ltr');
+      dirLabel.textContent = isRTL ? 'RTL' : 'LTR';
+    });
+
+    // Theme Toggle Logic
+    const themeToggle = document.getElementById('theme-toggle');
+    const sunIcon = document.getElementById('sun-icon');
+    const moonIcon = document.getElementById('moon-icon');
+    
+    let isDark = false;
+    themeToggle.addEventListener('click', () => {
+      isDark = !isDark;
+      htmlElem.setAttribute('data-theme', isDark ? 'dark' : 'light');
+      if(isDark) {
+        sunIcon.classList.add('hidden');
+        moonIcon.classList.remove('hidden');
+      } else {
+        sunIcon.classList.remove('hidden');
+        moonIcon.classList.add('hidden');
+      }
+    });
+
+    // Portfolio JS Filters
+    function filterGallery(category) {
+      // Update active button
+      document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+      event.target.classList.add('active');
+
+      // Filter items
+      const items = document.querySelectorAll('.bento-item');
+      items.forEach(item => {
+        if(category === 'all' || item.getAttribute('data-cat') === category) {
+          item.style.display = '';
+        } else {
+          item.style.display = 'none';
+        }
+      });
+    }
+
+    // Number Counter Animation
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if(entry.isIntersecting) {
+          const counters = document.querySelectorAll('.counter-num');
+          counters.forEach(counter => {
+            const updateCount = () => {
+              const target = +counter.getAttribute('data-target');
+              const count = +counter.innerText;
+              const speed = 200; // Adjust speed
+              const inc = target / speed;
+
+              if(count < target) {
+                counter.innerText = Math.ceil(count + inc);
+                setTimeout(updateCount, 20);
+              } else {
+                counter.innerText = target;
+              }
+            };
+            updateCount();
+          });
+          observer.unobserve(entry.target);
+        }
+      });
+    });
+    observer.observe(document.getElementById('counters-grid'));
+  </script>
+</body>
+</html>

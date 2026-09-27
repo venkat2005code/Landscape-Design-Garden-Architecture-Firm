@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Verdana Studio Process — From Discovery to Aftercare" />
+  <title>Our Process | Verdana Studio</title>
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Jost:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet" />
+  
+  <link rel="stylesheet" href="styles.css" />
+  
+  <style>
+    /* ============================================================
+       PROCESS PAGE: SPECIFIC STYLES
+       ============================================================ */
+
+    /* 1. HERO (Timeline Pills & SVG) */
+    .section-process-hero {
+      padding: 120px 0 80px;
+      background: var(--bg-primary);
+      min-height: calc(100vh - 80px);
+      display: flex;
+      align-items: center;
+    }
+    .process-hero-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+    }
+    .process-hero-content h1 {
+      font-family: var(--font-display);
+      font-size: clamp(48px, 6vw, 80px);
+      line-height: 1.1;
+      margin-bottom: 40px;
+    }
+    .process-hero-content h1 em {
+      font-family: var(--font-serif);
+      font-style: italic;
+      color: var(--clr-deep-green);
+    }
+    [data-theme="dark"] .process-hero-content h1 em { color: var(--clr-light-sage); }
+    
+    .pill-timeline {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .timeline-pill-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 16px;
+      padding: 16px 24px;
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 100px;
+      font-size: 16px;
+      font-weight: 500;
+      width: fit-content;
+      transition: all 0.3s;
+    }
+    .timeline-pill-link:hover {
+      background: var(--clr-deep-green);
+      color: #fff;
+      transform: translateX(10px);
+    }
+    [data-theme="dark"] .timeline-pill-link:hover { background: var(--clr-light-sage); color: var(--clr-forest); }
+    .pill-num {
+      font-size: 12px;
+      opacity: 0.6;
+    }
+
+    /* 2. DISCOVERY & CONSULTATION (Horizontal Split) */
+    .section-discovery {
+      padding: var(--section-py) 0;
+      background: var(--bg-secondary);
+    }
+    .discovery-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      margin-top: 60px;
+    }
+    .discovery-block {
+      background: var(--card-bg);
+      padding: 40px;
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+    }
+    .discovery-block h3 {
+      font-family: var(--font-serif);
+      font-size: 24px;
+      margin-bottom: 24px;
+      color: var(--clr-deep-green);
+    }
+    [data-theme="dark"] .discovery-block h3 { color: var(--clr-light-sage); }
+    .checklist { list-style: none; }
+    .checklist li {
+      position: relative;
+      padding-left: 32px;
+      margin-bottom: 16px;
+      font-size: 16px;
+      color: var(--text-secondary);
+    }
+    .checklist li::before {
+      content: '✓';
+      position: absolute;
+      left: 0; top: 0;
+      color: var(--clr-gold);
+      font-weight: bold;
+    }
+    .duration-badge {
+      display: inline-block;
+      margin-top: 24px;
+      padding: 8px 16px;
+      background: rgba(184, 134, 11, 0.1);
+      color: var(--clr-gold);
+      border-radius: var(--radius-sm);
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    /* 3. DESIGN DEVELOPMENT (Blueprint SVG + 3 Cols) */
+    .section-development {
+      padding: var(--section-py) 0;
+      background: var(--bg-primary);
+    }
+    .blueprint-visual {
+      width: 100%;
+      aspect-ratio: 21/9;
+      background: #113C4A; /* Blueprint Blue */
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      margin: 60px 0;
+    }
+    .blueprint-visual svg { width: 100%; height: 100%; opacity: 0.7; }
+    .dev-columns {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 40px;
+    }
+    .dev-col h4 {
+      font-family: var(--font-serif);
+      font-size: 20px;
+      margin-bottom: 16px;
+      border-bottom: 1px solid var(--border-color);
+      padding-bottom: 16px;
+    }
+    .dev-col p { color: var(--text-secondary); font-size: 15px; }
+
+    /* 4. CONSTRUCTION (Dark & Progress Bars) */
+    .section-construction {
+      padding: var(--section-py) 0;
+      background: #0B1A12;
+      color: #fff;
+    }
+    .section-construction .subtitle { color: var(--clr-gold); }
+    .section-construction .title em { color: var(--clr-light-sage); }
+    .construction-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      margin-top: 60px;
+    }
+    .progress-track {
+      margin-bottom: 40px;
+    }
+    .progress-track h4 {
+      font-size: 16px;
+      font-weight: 500;
+      margin-bottom: 12px;
+      display: flex;
+      justify-content: space-between;
+    }
+    .progress-track h4 span { color: var(--clr-gold); }
+    .progress-bar-bg {
+      width: 100%;
+      height: 8px;
+      background: rgba(255,255,255,0.1);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+    .progress-bar-fill {
+      height: 100%;
+      background: var(--clr-light-sage);
+      border-radius: 4px;
+    }
+
+    /* 5. AFTERCARE (Seasonal Grid) */
+    .section-aftercare {
+      padding: var(--section-py) 0;
+      background: var(--bg-secondary);
+    }
+    .seasonal-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+      margin-top: 60px;
+    }
+    .season-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-top: 4px solid var(--clr-deep-green);
+      border-radius: var(--radius-lg);
+      padding: 40px 24px;
+      text-align: center;
+    }
+    [data-theme="dark"] .season-card { border-top-color: var(--clr-light-sage); }
+    .season-card.spring { border-top-color: #84A98C; }
+    .season-card.summer { border-top-color: #D4A017; }
+    .season-card.autumn { border-top-color: #8B7355; }
+    .season-card.winter { border-top-color: #52796F; }
+    
+    .season-card h3 {
+      font-family: var(--font-serif);
+      font-size: 24px;
+      margin-bottom: 16px;
+    }
+    .season-card p {
+      font-size: 14px;
+      color: var(--text-secondary);
+    }
+
+    /* 6. FINAL CTA (Calendar & Form) */
+    .section-process-cta {
+      padding: var(--section-py) 0;
+      background: var(--bg-primary);
+    }
+    .cta-booking-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 60px;
+    }
+    .availability-box {
+      padding: 40px;
+      background: var(--bg-secondary);
+      border-radius: var(--radius-sm);
+      text-align: center;
+    }
+    .availability-box h2 {
+      font-family: var(--font-display);
+      font-size: 36px;
+      margin-bottom: 16px;
+    }
+    .date-badge {
+      display: inline-block;
+      font-size: 24px;
+      font-family: var(--font-serif);
+      color: var(--clr-deep-green);
+      padding: 16px 32px;
+      border: 1px solid var(--border-color);
+      background: var(--bg-primary);
+      border-radius: var(--radius-sm);
+    }
+    [data-theme="dark"] .date-badge { color: var(--clr-light-sage); }
+    .booking-form {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .booking-form input, .booking-form select {
+      padding: 16px;
+      border: 1px solid var(--border-color);
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      border-radius: var(--radius-sm);
+      font-size: 16px;
+    }
+    .booking-form button { margin-top: 8px; }
+
+    @media (max-width: 1024px) {
+      .process-hero-grid { grid-template-columns: 1fr; }
+      .pill-timeline { flex-direction: row; flex-wrap: wrap; }
+      .blueprint-visual { aspect-ratio: 16/9; }
+      .dev-columns { grid-template-columns: 1fr; }
+      .construction-grid { grid-template-columns: 1fr; }
+      .seasonal-grid { grid-template-columns: repeat(2, 1fr); }
+      .cta-booking-grid { grid-template-columns: 1fr; padding: 40px 20px; }
+    }
+    @media (max-width: 768px) {
+      .discovery-grid { grid-template-columns: 1fr; }
+      .seasonal-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="nav-logo" id="logo-link">
+        <div class="logo-icon">
+          <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M50 10C27.9086 10 10 27.9086 10 50C10 72.0914 27.9086 90 50 90C72.0914 90 90 72.0914 90 50C90 27.9086 72.0914 10 50 10Z" stroke="currentColor" stroke-width="2" opacity="0.3"/>
+            <path d="M50 90V60" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+            <path d="M50 60C35 60 25 45 35 30C45 15 55 15 65 30C75 45 65 60 50 60Z" stroke="currentColor" stroke-width="2" fill="currentColor" fill-opacity="0.1"/>
+            <path d="M50 60C42 60 35 50 42 40C48 30 52 30 58 40C65 50 58 60 50 60Z" stroke="currentColor" stroke-width="2"/>
+          </svg>
+        </div>
+        <div class="logo-text">
+          <span class="logo-name">Verdana</span>
+          
+        </div>
+      </a>
+
+      <!-- Navigation Links -->
+      <nav class="nav-links" id="nav-links">
+        <div class="nav-item has-dropdown">
+          <a href="#" class="nav-link dropdown-trigger">Home <span class="caret">▼</span></a>
+          <div class="dropdown-menu">
+            <a href="index.html" class="dropdown-item">Home 1 — Garden</a>
+            <a href="home2.html" class="dropdown-item">Home 2 — Architecture</a>
+          </div>
+        </div>
+        <a href="about.html" class="nav-link">About</a>
+        <a href="services.html" class="nav-link">Services</a>
+        <a href="portfolio.html" class="nav-link">Portfolio</a>
+        <a href="process.html" class="nav-link active">Process</a>
+        <a href="contact.html" class="nav-link">Contact</a>
+      </nav>
+
+      <!-- Controls & CTA -->
+      <div class="nav-controls">
+        <button class="ctrl-btn" id="rtl-toggle" aria-label="Toggle Text Direction">
+          <span id="dir-label">LTR</span>
+        </button>
+        <button class="ctrl-btn" id="theme-toggle" aria-label="Toggle Theme">
+          <span class="theme-icon sun" id="sun-icon"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg></span>
+          <span class="theme-icon moon hidden" id="moon-icon"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg></span>
+        </button>
+        <a href="contact.html" class="btn-primary nav-cta">Book Consultation</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- SECTION 1: HERO (Pill Timeline + SVG) -->
+    <section class="section-process-hero">
+      <div class="container">
+        <div class="process-hero-grid">
+          <div class="process-hero-content">
+            <span class="subtitle">How We Work</span>
+            <h1>From Concept <br>To <em>Canopy.</em></h1>
+            <p style="margin-bottom: 40px; color: var(--text-secondary); max-width: 400px;">A transparent, collaborative journey ensuring your landscape is delivered with absolute precision and care.</p>
+            
+            <div class="pill-timeline">
+              <a href="#discovery" class="timeline-pill-link">
+                <span class="pill-num">01.</span> Discovery & Consultation
+              </a>
+              <a href="#design" class="timeline-pill-link">
+                <span class="pill-num">02.</span> Design Development
+              </a>
+              <a href="#construction" class="timeline-pill-link">
+                <span class="pill-num">03.</span> Build & Installation
+              </a>
+              <a href="#aftercare" class="timeline-pill-link">
+                <span class="pill-num">04.</span> Seasonal Aftercare
+              </a>
+            </div>
+          </div>
+          
+          <div class="process-hero-visual">
+            <img src="process_hero.png" alt="Design Process" style="width: 100%; height: 100%; object-fit: cover;" />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 2: DISCOVERY (Horizontal Split) -->
+    <section id="discovery" class="section-discovery">
+      <div class="container">
+        <div class="section-header">
+          <span class="subtitle">Phase 01</span>
+          <h2 class="title">Discovery & <em>Consultation</em></h2>
+          <p style="color:var(--text-secondary); max-width:600px; margin-top:20px;">We begin by understanding you, your property, and how you intend to use the space. This is a crucial phase of listening and site analysis.</p>
+        </div>
+
+        <div class="discovery-grid">
+          <div class="discovery-block">
+            <h3>Our Deliverables</h3>
+            <ul class="checklist">
+              <li>Initial on-site or virtual consultation</li>
+              <li>Topographical and boundary survey</li>
+              <li>Soil sampling and microclimate analysis</li>
+              <li>Project scope and initial fee proposal</li>
+            </ul>
+            <div class="duration-badge">Timeline: 2 - 3 Weeks</div>
+          </div>
+          
+          <div class="discovery-block">
+            <h3>What to Prepare</h3>
+            <ul class="checklist" style="color: var(--text-primary);">
+              <li>Any existing house plans or surveys</li>
+              <li>Pinterest boards or inspirational imagery</li>
+              <li>A list of desired functions (e.g., dining, play, secluded reading)</li>
+              <li>Understanding of your ideal budget range</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 3: DESIGN DEVELOPMENT (Blueprint + 3 Cols) -->
+    <section id="design" class="section-development">
+      <div class="container">
+        <div class="section-header center">
+          <span class="subtitle">Phase 02 & 03</span>
+          <h2 class="title">Design <em>Development</em></h2>
+        </div>
+
+        <div class="blueprint-visual">
+          <img src="process_blueprint.png" alt="Landscape Blueprint" style="width: 100%; height: 100%; object-fit: cover;" />
+        </div>
+
+        <div class="dev-columns">
+          <div class="dev-col">
+            <h4>Concept Presentation</h4>
+            <p>We present mood boards, initial sketches, and spatial layouts. This is a collaborative review to ensure our vision aligns perfectly with yours before technical work begins.</p>
+          </div>
+          <div class="dev-col">
+            <h4>Masterplan & 3D</h4>
+            <p>Refining the concept into a rigid masterplan. We provide 3D renders of key sightlines, allowing you to walk through the space virtually before ground is broken.</p>
+          </div>
+          <div class="dev-col">
+            <h4>Technical Detailing</h4>
+            <p>Creating exact CAD drawings for hardscaping, bespoke joinery, and lighting schematics. This ensures precise pricing and flawless execution by the build team.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 4: CONSTRUCTION (Dark + Progress Bars) -->
+    <section id="construction" class="section-construction">
+      <div class="container">
+        <div class="section-header">
+          <span class="subtitle">Phase 04</span>
+          <h2 class="title">Build & <em>Installation</em></h2>
+          <p style="color:rgba(255,255,255,0.7); max-width:600px; margin-top:20px;">Where drawings become reality. Our in-house management ensures every stone is laid and every tree planted exactly to specification.</p>
+        </div>
+
+        <div class="construction-grid">
+          <div>
+            <p style="font-size: 18px; line-height: 1.8; margin-bottom: 24px;">
+              We manage the entire tendering and build process. From groundworks and drainage to the final placement of furniture, you have a single point of contact holding the contractors to our exacting standards.
+            </p>
+            <a href="portfolio.html" class="btn-ghost" style="border-color: rgba(255,255,255,0.3); color: #fff;">View Finished Builds</a>
+          </div>
+          
+          <div class="progress-bars">
+            <div class="progress-track">
+              <h4>Groundworks & Drainage <span>Wks 1-3</span></h4>
+              <div class="progress-bar-bg"><div class="progress-bar-fill" style="width: 20%;"></div></div>
+            </div>
+            <div class="progress-track">
+              <h4>Hardscaping & Structures <span>Wks 3-8</span></h4>
+              <div class="progress-bar-bg"><div class="progress-bar-fill" style="width: 50%;"></div></div>
+            </div>
+            <div class="progress-track">
+              <h4>Soil Preparation & Planting <span>Wks 8-10</span></h4>
+              <div class="progress-bar-bg"><div class="progress-bar-fill" style="width: 80%;"></div></div>
+            </div>
+            <div class="progress-track">
+              <h4>Lighting & Final Handover <span>Wk 11</span></h4>
+              <div class="progress-bar-bg"><div class="progress-bar-fill" style="width: 100%; background: var(--clr-gold);"></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 5: AFTERCARE (Seasonal Grid) -->
+    <section id="aftercare" class="section-aftercare">
+      <div class="container">
+        <div class="section-header center">
+          <span class="subtitle">Phase 05</span>
+          <h2 class="title">Seasonal <em>Aftercare</em></h2>
+          <p style="color:var(--text-secondary); max-width:600px; margin:20px auto 0;">A garden is never truly 'finished'. We offer ongoing horticultural maintenance to ensure the landscape matures exactly as intended.</p>
+        </div>
+
+        <div class="seasonal-grid">
+          <div class="season-card spring">
+            <h3>Spring</h3>
+            <p>Pruning of deciduous shrubs, application of organic mulches, and checking irrigation lines before the growing season.</p>
+          </div>
+          <div class="season-card summer">
+            <h3>Summer</h3>
+            <p>Deadheading for continuous blooms, monitoring water systems during dry spells, and structural hedging trims.</p>
+          </div>
+          <div class="season-card autumn">
+            <h3>Autumn</h3>
+            <p>Planting of spring bulbs, lifting of tender perennials, and structural pruning to ensure winter silhouettes.</p>
+          </div>
+          <div class="season-card winter">
+            <h3>Winter</h3>
+            <p>Hardwood pruning, servicing of water features, and assessing soil health for the coming year.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 6: FINAL CTA (Calendar & Form) -->
+    <section class="section-process-cta">
+      <div class="container">
+        <div class="cta-booking-grid">
+          <div class="availability-box">
+            <h2>Start the Process</h2>
+            <p style="color:var(--text-secondary); margin-bottom:32px;">We are currently taking on new design commissions starting in:</p>
+            <div class="date-badge">November 2026</div>
+          </div>
+          
+          <div class="booking-form-wrapper">
+            <h3 style="font-family:var(--font-serif); font-size:28px; margin-bottom:24px;">Book a Discovery Call</h3>
+            <form class="booking-form" onsubmit="event.preventDefault(); alert('Booking Requested!');">
+              <input type="text" placeholder="Full Name" required />
+              <input type="email" placeholder="Email Address" required />
+              <select required>
+                <option value="">Select Call Time...</option>
+                <option value="morning">Morning (9am - 12pm)</option>
+                <option value="afternoon">Afternoon (1pm - 5pm)</option>
+              </select>
+              <button type="submit" class="btn-primary">Request Call</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+    <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+                <div class="footer-brand">
+          <a href="index.html" class="nav-logo" style="margin-bottom: 24px; text-decoration: none;">
+            <div class="logo-icon">
+              <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M50 10C27.9086 10 10 27.9086 10 50C10 72.0914 27.9086 90 50 90C72.0914 90 90 72.0914 90 50C90 27.9086 72.0914 10 50 10Z" stroke="currentColor" stroke-width="2" opacity="0.3"/>
+                <path d="M50 90V60" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+                <path d="M50 60C35 60 25 45 35 30C45 15 55 15 65 30C75 45 65 60 50 60Z" stroke="currentColor" stroke-width="2" fill="currentColor" fill-opacity="0.1"/>
+                <path d="M50 60C42 60 35 50 42 40C48 30 52 30 58 40C65 50 58 60 50 60Z" stroke="currentColor" stroke-width="2"/>
+              </svg>
+            </div>
+            <div class="logo-text" style="text-align: left;">
+              <span class="logo-name">Verdana</span>
+              
+            </div>
+          </a>
+          <div class="footer-socials">
+            <a href="#" aria-label="Instagram"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg></a>
+            <a href="#" aria-label="Pinterest"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12.017 0C5.396 0 .029 5.367.029 11.987c0 5.079 3.158 9.417 7.618 11.162-.105-.949-.199-2.403.041-3.439.219-.937 1.406-5.957 1.406-5.957s-.359-.72-.359-1.781c0-1.663.967-2.911 2.168-2.911 1.024 0 1.518.769 1.518 1.688 0 1.029-.653 2.567-.992 3.992-.285 1.193.6 2.165 1.775 2.165 2.128 0 3.768-2.245 3.768-5.487 0-2.861-2.063-4.869-5.008-4.869-3.41 0-5.409 2.562-5.409 5.199 0 1.033.394 2.143.889 2.741.099.12.112.225.085.345-.09.375-.293 1.199-.334 1.363-.053.225-.172.271-.401.165-1.495-.69-2.433-2.878-2.433-4.646 0-3.776 2.748-7.252 7.951-7.252 4.168 0 7.41 2.967 7.41 6.923 0 4.135-2.607 7.462-6.233 7.462-1.214 0-2.354-.629-2.758-1.379l-.749 2.848c-.269 1.045-1.004 2.352-1.498 3.146 1.123.345 2.306.535 3.55.535 6.607 0 11.985-5.365 11.985-11.987C23.97 5.367 18.624 0 12.017 0z"/></svg></a>
+            <a href="#" aria-label="LinkedIn"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg></a>
+          </div>
+        </div>
+        <div class="footer-links">
+          <h4>Studio</h4>
+          <a href="index.html">Home</a>
+          <a href="about.html">About Us</a>
+          <a href="portfolio.html">Portfolio</a>
+          <a href="process.html">Our Process</a>
+        </div>
+        <div class="footer-links">
+          <h4>Expertise</h4>
+          <a href="services.html">Services Overview</a>
+          <a href="services.html#garden-design">Garden Design</a>
+          <a href="services.html#hardscaping">Hardscaping</a>
+          <a href="services.html#irrigation">Irrigation</a>
+        </div>
+        <div class="footer-contact">
+          <h4>Connect</h4>
+          <a href="contact.html">Contact Us</a>
+          <a href="mailto:studio@verdanastudio.com">studio@verdanastudio.com</a>
+          <a href="tel:+442078901234">+44 (0) 20 7890 1234</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 Verdana Studio. All rights reserved.</p>
+        <div class="footer-legal">
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms & Conditions</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // RTL / LTR Toggle Logic
+    const rtlToggle = document.getElementById('rtl-toggle');
+    const dirLabel = document.getElementById('dir-label');
+    const htmlElem = document.documentElement;
+    
+    let isRTL = false;
+    rtlToggle.addEventListener('click', () => {
+      isRTL = !isRTL;
+      htmlElem.setAttribute('dir', isRTL ? 'rtl' : 'ltr');
+      dirLabel.textContent = isRTL ? 'RTL' : 'LTR';
+    });
+
+    // Theme Toggle Logic
+    const themeToggle = document.getElementById('theme-toggle');
+    const sunIcon = document.getElementById('sun-icon');
+    const moonIcon = document.getElementById('moon-icon');
+    
+    let isDark = false;
+    themeToggle.addEventListener('click', () => {
+      isDark = !isDark;
+      htmlElem.setAttribute('data-theme', isDark ? 'dark' : 'light');
+      if(isDark) {
+        sunIcon.classList.add('hidden');
+        moonIcon.classList.remove('hidden');
+      } else {
+        sunIcon.classList.remove('hidden');
+        moonIcon.classList.add('hidden');
+      }
+    });
+  </script>
+</body>
+</html>
