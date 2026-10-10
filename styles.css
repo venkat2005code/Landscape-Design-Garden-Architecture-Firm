@@ -90,14 +90,14 @@ img, svg { max-width: 100%; display: block; }
 
 /* ---- BUTTONS ---- */
 .btn-primary {
-  display: inline-flex; padding: 14px 28px; background: var(--clr-forest); color: #fff;
+  display: inline-flex; justify-content: center; align-items: center; text-align: center; width: fit-content; padding: 14px 28px; background: var(--clr-forest); color: #fff;
   font-weight: 500; font-size: 14px; text-transform: uppercase; letter-spacing: 0.05em;
   border-radius: var(--radius-sm); transition: background 0.3s, transform 0.3s;
 }
 .btn-primary:hover { background: var(--clr-deep-green); transform: translateY(-2px); }
 
 .btn-ghost {
-  display: inline-flex; padding: 12px 24px; border: 1px solid var(--clr-deep-green); color: var(--clr-deep-green);
+  display: inline-flex; justify-content: center; align-items: center; text-align: center; width: fit-content; padding: 12px 24px; border: 1px solid var(--clr-deep-green); color: var(--clr-deep-green);
   font-weight: 500; font-size: 14px; text-transform: uppercase; letter-spacing: 0.05em;
   border-radius: var(--radius-sm); transition: all 0.3s;
 }
