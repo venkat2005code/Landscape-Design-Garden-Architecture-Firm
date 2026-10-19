@@ -5,6 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="About Verdana Studio — Our Story, Beliefs, and Team" />
   <title>About Us | Verdana Studio</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <link rel="icon" type="image/png" href="favicon.png" />
+  <link rel="shortcut icon" href="favicon.ico" />
   
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -348,6 +351,7 @@
         <a href="portfolio.html" class="nav-link">Portfolio</a>
         <a href="process.html" class="nav-link">Process</a>
         <a href="contact.html" class="nav-link">Contact</a>
+        <a href="contact.html" class="btn-primary mobile-menu-cta">Book Consultation</a>
       </nav>
 
       <!-- Controls & CTA -->
@@ -360,9 +364,16 @@
           <span class="theme-icon moon hidden" id="moon-icon"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg></span>
         </button>
         <a href="contact.html" class="btn-primary nav-cta">Book Consultation</a>
+
+        <button class="hamburger-btn" id="hamburger" aria-label="Toggle navigation" aria-expanded="false">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
       </div>
     </div>
   </header>
+  <div class="mobile-overlay" id="mobile-overlay"></div>
 
   <main>
     <!-- SECTION 1: HERO (Editorial Wide) -->
@@ -653,6 +664,50 @@
         sunIcon.classList.remove('hidden');
         moonIcon.classList.add('hidden');
       }
+    });
+
+    // Mobile Navigation Drawer Toggle
+    const hamburger = document.getElementById('hamburger');
+    const navLinks = document.getElementById('nav-links');
+    const mobileOverlay = document.getElementById('mobile-overlay');
+
+    function openMobileNav() {
+      if (navLinks) navLinks.classList.add('open');
+      if (hamburger) {
+        hamburger.classList.add('open');
+        hamburger.setAttribute('aria-expanded', 'true');
+      }
+      if (mobileOverlay) mobileOverlay.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeMobileNav() {
+      if (navLinks) navLinks.classList.remove('open');
+      if (hamburger) {
+        hamburger.classList.remove('open');
+        hamburger.setAttribute('aria-expanded', 'false');
+      }
+      if (mobileOverlay) mobileOverlay.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    if (hamburger) {
+      hamburger.addEventListener('click', (e) => {
+        e.stopPropagation();
+        navLinks && navLinks.classList.contains('open') ? closeMobileNav() : openMobileNav();
+      });
+    }
+
+    if (mobileOverlay) {
+      mobileOverlay.addEventListener('click', closeMobileNav);
+    }
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeMobileNav();
+    });
+
+    document.querySelectorAll('.nav-links .nav-link:not(.dropdown-trigger), .dropdown-item, .mobile-menu-cta').forEach(link => {
+      link.addEventListener('click', closeMobileNav);
     });
   </script>
 </body>

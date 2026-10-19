@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <defs>
+    <linearGradient id="forestGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1B4332"/>
+      <stop offset="100%" stop-color="#2D6A4F"/>
+    </linearGradient>
+    <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#F3DC9B"/>
+      <stop offset="100%" stop-color="#C29B38"/>
+    </linearGradient>
+  </defs>
+  <!-- Background Disc with subtle border -->
+  <rect width="64" height="64" rx="16" fill="url(#forestGrad)"/>
+  <rect x="1" y="1" width="62" height="62" rx="15" fill="none" stroke="#84A98C" stroke-width="1.5" stroke-opacity="0.3"/>
+  <!-- Delicate perimeter circle -->
+  <circle cx="32" cy="32" r="26" stroke="#84A98C" stroke-width="1.5" stroke-opacity="0.35" fill="none"/>
+  <!-- Tree stem -->
+  <path d="M32 54V38" stroke="url(#goldGrad)" stroke-width="3" stroke-linecap="round"/>
+  <!-- Outer foliage dome -->
+  <path d="M32 38C21 38 14 27.5 21 17C28 6.5 36 6.5 43 17C50 27.5 43 38 32 38Z" stroke="url(#goldGrad)" stroke-width="2" fill="#84A98C" fill-opacity="0.3"/>
+  <!-- Inner foliage accent -->
+  <path d="M32 38C26 38 21.5 31 26 24C30 17 34 17 38 24C42.5 31 38 38 32 38Z" stroke="url(#goldGrad)" stroke-width="1.8" fill="url(#goldGrad)" fill-opacity="0.35"/>
+</svg>

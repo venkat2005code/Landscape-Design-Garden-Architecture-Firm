@@ -136,17 +136,23 @@ function closeDropdown() {
   homeTrigger.setAttribute('aria-expanded', 'false');
 }
 
-homeTrigger.addEventListener('click', (e) => {
-  e.stopPropagation();
-  homeDropdown.classList.contains('open') ? closeDropdown() : openDropdown();
-});
+if (homeTrigger && homeDropdown) {
+  homeTrigger.addEventListener('click', (e) => {
+    e.stopPropagation();
+    homeDropdown.classList.contains('open') ? closeDropdown() : openDropdown();
+  });
 
-// Close when clicking outside
-document.addEventListener('click', (e) => {
-  if (!homeDropdown.contains(e.target)) {
-    closeDropdown();
-  }
-});
+  // Close when clicking outside
+  document.addEventListener('click', (e) => {
+    if (!homeDropdown.contains(e.target)) {
+      closeDropdown();
+    }
+  });
+
+  // Hover behavior for desktop
+  homeDropdown.addEventListener('mouseenter', openDropdown);
+  homeDropdown.addEventListener('mouseleave', closeDropdown);
+}
 
 // Close on Escape key
 document.addEventListener('keydown', (e) => {
@@ -155,10 +161,6 @@ document.addEventListener('keydown', (e) => {
     closeMobileNav();
   }
 });
-
-// Hover behavior for desktop
-homeDropdown.addEventListener('mouseenter', openDropdown);
-homeDropdown.addEventListener('mouseleave', closeDropdown);
 
 // Close dropdown on dropdown-item click
 document.querySelectorAll('.dropdown-item').forEach(item => {
@@ -172,24 +174,28 @@ document.querySelectorAll('.dropdown-item').forEach(item => {
 // 5. MOBILE NAV
 // ============================================================
 function openMobileNav() {
-  navLinks.classList.add('open');
-  hamburger.classList.add('open');
-  mobileOverlay.classList.add('active');
+  if (navLinks) navLinks.classList.add('open');
+  if (hamburger) hamburger.classList.add('open');
+  if (mobileOverlay) mobileOverlay.classList.add('active');
   body.style.overflow = 'hidden';
 }
 
 function closeMobileNav() {
-  navLinks.classList.remove('open');
-  hamburger.classList.remove('open');
-  mobileOverlay.classList.remove('active');
+  if (navLinks) navLinks.classList.remove('open');
+  if (hamburger) hamburger.classList.remove('open');
+  if (mobileOverlay) mobileOverlay.classList.remove('active');
   body.style.overflow = '';
 }
 
-hamburger.addEventListener('click', () => {
-  navLinks.classList.contains('open') ? closeMobileNav() : openMobileNav();
-});
+if (hamburger && navLinks) {
+  hamburger.addEventListener('click', () => {
+    navLinks.classList.contains('open') ? closeMobileNav() : openMobileNav();
+  });
+}
 
-mobileOverlay.addEventListener('click', closeMobileNav);
+if (mobileOverlay) {
+  mobileOverlay.addEventListener('click', closeMobileNav);
+}
 
 // Close mobile nav on nav link click
 document.querySelectorAll('.nav-link:not(.dropdown-trigger)').forEach(link => {
