@@ -122,13 +122,19 @@
       gap: 32px;
       overflow-x: auto;
       padding-bottom: 40px;
+      padding-left: var(--container-px, 40px);
+      padding-right: var(--container-px, 40px);
       margin-top: 60px;
       scrollbar-width: none; /* Firefox */
+      /* Allow full-width scrolling beyond container */
+      width: 100%;
+      box-sizing: border-box;
     }
     .case-studies-scroll::-webkit-scrollbar { display: none; }
     
     .case-card {
-      flex: 0 0 450px;
+      flex: 0 0 420px;
+      min-width: 320px;
       background: var(--card-bg);
       border: 1px solid var(--border-color);
       border-radius: var(--radius-sm);
@@ -137,6 +143,7 @@
     .case-visual {
       height: 250px;
       background: var(--clr-forest);
+      overflow: hidden;
     }
     .case-visual svg {
       width: 100%; height: 100%; object-fit: cover; opacity: 0.8;
@@ -393,55 +400,56 @@
             <h2 class="title">Scale & <em>Precision</em></h2>
           </div>
         </div>
+      </div>
+
+      <!-- Scroll row is outside .container so cards aren't clipped by max-width -->
+      <div class="case-studies-scroll">
         
-        <div class="case-studies-scroll">
-          
-          <div class="case-card">
-            <div class="case-visual">
-              <img src="home2_case1.png" alt="Corporate Campus" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.7s ease;" />
-            </div>
-            <div class="case-content">
-              <div class="case-meta">
-                <span>Corporate Campus</span>
-                <span>•</span>
-                <span>12 Acres</span>
-              </div>
-              <h4>Nexus Tech Headquarters</h4>
-              <p class="text-secondary">A highly structured geometric layout promoting employee wellness through navigable green corridors and sunken courtyards.</p>
-            </div>
+        <div class="case-card">
+          <div class="case-visual">
+            <img src="home2_case1.png" alt="Corporate Campus" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.7s ease;" />
           </div>
-
-          <div class="case-card">
-            <div class="case-visual">
-              <img src="home2_case2.png" alt="Private Estate" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.7s ease;" />
+          <div class="case-content">
+            <div class="case-meta">
+              <span>Corporate Campus</span>
+              <span>•</span>
+              <span>12 Acres</span>
             </div>
-            <div class="case-content">
-              <div class="case-meta">
-                <span>Private Estate</span>
-                <span>•</span>
-                <span>4.5 Acres</span>
-              </div>
-              <h4>The Moorlands Manor</h4>
-              <p class="text-secondary">A modern interpretation of a classical parterre garden, featuring expansive limestone terraces and an illuminated water axis.</p>
-            </div>
+            <h4>Nexus Tech Headquarters</h4>
+            <p class="text-secondary">A highly structured geometric layout promoting employee wellness through navigable green corridors and sunken courtyards.</p>
           </div>
-
-          <div class="case-card">
-            <div class="case-visual">
-              <img src="home2_case3.png" alt="Urban Development" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.7s ease;" />
-            </div>
-            <div class="case-content">
-              <div class="case-meta">
-                <span>Urban Development</span>
-                <span>•</span>
-                <span>80,000 sq ft</span>
-              </div>
-              <h4>Riverwalk Plaza</h4>
-              <p class="text-secondary">Public realm landscape integrating complex structural engineering, sustainable drainage systems, and mature tree planting.</p>
-            </div>
-          </div>
-
         </div>
+
+        <div class="case-card">
+          <div class="case-visual">
+            <img src="home2_case2.png" alt="Private Estate" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.7s ease;" />
+          </div>
+          <div class="case-content">
+            <div class="case-meta">
+              <span>Private Estate</span>
+              <span>•</span>
+              <span>4.5 Acres</span>
+            </div>
+            <h4>The Moorlands Manor</h4>
+            <p class="text-secondary">A modern interpretation of a classical parterre garden, featuring expansive limestone terraces and an illuminated water axis.</p>
+          </div>
+        </div>
+
+        <div class="case-card">
+          <div class="case-visual">
+            <img src="home2_case3.png" alt="Urban Development" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.7s ease;" />
+          </div>
+          <div class="case-content">
+            <div class="case-meta">
+              <span>Urban Development</span>
+              <span>•</span>
+              <span>80,000 sq ft</span>
+            </div>
+            <h4>Riverwalk Plaza</h4>
+            <p class="text-secondary">Public realm landscape integrating complex structural engineering, sustainable drainage systems, and mature tree planting.</p>
+          </div>
+        </div>
+
       </div>
     </section>
 
@@ -600,17 +608,29 @@
     const moonIcon = document.getElementById('moon-icon');
     
     let isDark = false;
-    themeToggle.addEventListener('click', () => {
-      isDark = !isDark;
-      htmlElem.setAttribute('data-theme', isDark ? 'dark' : 'light');
-      if(isDark) {
+
+    function applyTheme(dark) {
+      isDark = dark;
+      htmlElem.setAttribute('data-theme', dark ? 'dark' : 'light');
+      if (dark) {
         sunIcon.classList.add('hidden');
         moonIcon.classList.remove('hidden');
       } else {
         sunIcon.classList.remove('hidden');
         moonIcon.classList.add('hidden');
       }
-    });
+      localStorage.setItem('verdana-theme', dark ? 'dark' : 'light');
+    }
+
+    themeToggle.addEventListener('click', () => applyTheme(!isDark));
+
+    // Restore saved theme on page load
+    const _savedTheme = localStorage.getItem('verdana-theme');
+    if (_savedTheme === 'dark') {
+      applyTheme(true);
+    } else if (!_savedTheme && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+      applyTheme(true);
+    }
 
     // Mobile Navigation Drawer Toggle
     const hamburger = document.getElementById('hamburger');
