@@ -117,34 +117,39 @@
       background: var(--bg-secondary);
       overflow: hidden;
     }
+    /* Desktop: 3-column grid aligned to the same edges as .container */
     .case-studies-scroll {
-      display: flex;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: 32px;
-      overflow-x: auto;
-      padding-bottom: 40px;
-      padding-left: var(--container-px, 40px);
-      padding-right: var(--container-px, 40px);
-      margin-top: 60px;
-      scrollbar-width: none; /* Firefox */
-      /* Allow full-width scrolling beyond container */
-      width: 100%;
+      max-width: var(--container-max);
+      margin: 60px auto 0;
+      padding: 0 var(--container-px) 40px;
       box-sizing: border-box;
+      scrollbar-width: none; /* Firefox */
     }
     .case-studies-scroll::-webkit-scrollbar { display: none; }
-    
+
     .case-card {
-      flex: 0 0 420px;
-      min-width: 320px;
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
       background: var(--card-bg);
       border: 1px solid var(--border-color);
       border-radius: var(--radius-sm);
       overflow: hidden;
     }
     .case-visual {
+      position: relative;
       height: 250px;
       background: var(--clr-forest);
       overflow: hidden;
     }
+    .case-visual img {
+      position: absolute;
+      inset: 0;
+    }
+    .case-card:hover .case-visual img { transform: scale(1.05); }
     .case-visual svg {
       width: 100%; height: 100%; object-fit: cover; opacity: 0.8;
     }
@@ -153,13 +158,15 @@
     }
     .case-meta {
       display: flex;
-      gap: 16px;
+      flex-wrap: wrap;
+      gap: 8px 16px;
       margin-bottom: 16px;
       font-size: 12px;
       text-transform: uppercase;
       letter-spacing: 0.1em;
       color: var(--clr-mid-green);
     }
+    .case-meta span { white-space: nowrap; }
     .case-content h4 {
       font-family: var(--font-display);
       font-size: 28px;
@@ -279,7 +286,14 @@
       .pipeline { grid-template-columns: 1fr 1fr; gap: 40px; }
       .pipeline::before { display: none; }
       .awards-grid { grid-template-columns: 1fr; }
-      .case-card { flex: 0 0 350px; }
+      /* Tablet/mobile: horizontal swipe row, still starting at the container edge */
+      .case-studies-scroll {
+        display: flex;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        scroll-padding-left: var(--container-px);
+      }
+      .case-card { flex: 0 0 min(350px, 85%); scroll-snap-align: start; }
     }
     @media (max-width: 768px) {
       .pipeline { grid-template-columns: 1fr; }
